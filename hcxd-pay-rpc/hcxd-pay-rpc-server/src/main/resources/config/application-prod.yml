@@ -1,0 +1,45 @@
+spring:
+    data:
+        mongodb: # mongodb://name:pass@114.55.177.236:27017/mpns_test
+            uri: mongodb://114.55.177.236:27017/mpns_test
+    cloud:
+        zookeeper:
+            connectString: localhost:2181,localhost:2182,localhost:2183
+            discovery:
+                instanceHost: 127.0.0.1
+                instancePort: ${server.port}
+server:
+    port: 8885
+grpc:
+    server:
+        port: 9988
+
+
+
+#server:
+#    port: 0
+#albedo:
+#    zookeeper:
+#        connectString: localhost:2181,localhost:2182,localhost:2183
+#    rpc:
+#        registerPath: /app/node
+#        appName: hcxd-mpns-rpc-server
+#        hostUrl: localhost:8181
+
+
+
+
+#grpc:
+#  server:
+#    port: 9988
+#eureka:
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka/
+#  instance:
+#    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+
+
+
