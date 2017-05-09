@@ -83,7 +83,7 @@ CodeMirror.defineMode("clojure", function (options) {
             return true;
         }
 
-        // leading sign
+        // leading base
         if ( ( ch == '+' || ch == '-' ) && ( tests.digit.test(stream.peek()) ) ) {
           stream.eat(tests.sign);
           ch = stream.next();

@@ -20,9 +20,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * 支付订单管理Controller 支付订单
- * @author lj
- * @version 2017-05-03
+ * 支付订单Controller 支付订单
+ * @author lijie
+ * @version 2017-05-05
  */
 @Controller
 @RequestMapping(value = "${albedo.adminPath}/pay/order")

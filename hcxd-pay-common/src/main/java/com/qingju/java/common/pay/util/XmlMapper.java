@@ -116,11 +116,17 @@ public class XmlMapper {
 
 
     public static String map2SimplXml(Map<String, Object> map) {
+        return map2SimplXml(map, false);
+    }
+
+    public static String map2SimplXml(Map<String, Object> map, boolean isCData) {
         StringBuffer sb = new StringBuffer("<xml>\n");
         if (map == null || map.isEmpty()) {
             return "";
         }
-        map.forEach((k, v) -> sb.append("<").append(k).append(">").append(v).append("</").append(k).append(">"));
+        map.forEach((k, v) -> sb.append("<").append(k).append(">").
+                append(isCData ? "<![CDATA[" : "").append(v).
+                append(isCData ? "]]>" : "").append("</").append(k).append(">"));
         sb.append("</xml>");
         return sb.toString();
     }

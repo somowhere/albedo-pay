@@ -4173,9 +4173,9 @@ Expr = Sizzle.selectors = {
 				1 type (only|nth|...)
 				2 argument (even|odd|\d*|\d*n([+-]\d+)?|...)
 				3 xn-component of xn+y argument ([+-]?\d*n|)
-				4 sign of xn-component
+				4 base of xn-component
 				5 x of xn-component
-				6 sign of y-component
+				6 base of y-component
 				7 y of y-component
 			*/
 			match[1] = match[1].toLowerCase();

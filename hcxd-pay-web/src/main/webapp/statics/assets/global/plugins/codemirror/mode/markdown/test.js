@@ -727,8 +727,8 @@
   // []  square brackets
   // ()  parentheses
   // #   hash mark
-  // +   plus sign
-  // -   minus sign (hyphen)
+  // +   plus base
+  // -   minus base (hyphen)
   // .   dot
   // !   exclamation mark
 

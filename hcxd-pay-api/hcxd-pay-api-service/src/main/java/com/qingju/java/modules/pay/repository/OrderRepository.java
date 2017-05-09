@@ -6,6 +6,11 @@ package com.qingju.java.modules.pay.repository;
 
 import com.albedo.java.common.data.mybatis.persistence.repository.BaseRepository;
 import com.qingju.java.modules.pay.domain.Order;
+import com.qingju.java.vo.pay.PayQuery;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.data.mybatis.repository.annotation.Query;
+
+import java.util.List;
 
 /**
  * 支付订单管理Repository 支付订单
@@ -14,5 +19,9 @@ import com.qingju.java.modules.pay.domain.Order;
  */
 public interface OrderRepository extends BaseRepository<Order, String> {
 
-	
+
+    Order findOneByBizCode(String bizCode);
+
+    @Query
+    List<Order> findOrders(@Param("payQuery") PayQuery payQuery);
 }

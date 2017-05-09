@@ -14,6 +14,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Data @ToString
 public class PayProperties {
 
-    public String domain;
+    private String domain;
+
+    private String appDomain;
 
 }

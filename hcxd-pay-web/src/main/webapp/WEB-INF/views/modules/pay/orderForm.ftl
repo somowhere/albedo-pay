@@ -35,6 +35,12 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<label class="control-label col-md-3">第三方交易编号<span class="required">*</span></label>
+					<div class="col-md-5">
+						<input type="text" name="tradeId" id="tradeId" class="form-control required" value="${(order.tradeId)!}" htmlEscape="false" maxlength="128">
+					</div>
+				</div>
+				<div class="form-group">
 					<label class="control-label col-md-3">金额<span class="required">*</span></label>
 					<div class="col-md-5">
 						<input type="text" name="amount" id="amount" class="form-control required number" value="${(order.amount)!}" htmlEscape="false">
@@ -53,27 +59,39 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-md-3">客户端ip<span class="required">*</span></label>
+					<label class="control-label col-md-3">client_ip</label>
 					<div class="col-md-5">
-						<input type="text" name="clientIp" id="clientIp" class="form-control required" value="${(order.clientIp)!}" htmlEscape="false" maxlength="32">
+						<input type="text" name="clientIp" id="clientIp" class="form-control" value="${(order.clientIp)!}" htmlEscape="false" maxlength="32">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-md-3">主题<span class="required">*</span></label>
+					<label class="control-label col-md-3">subject_<span class="required">*</span></label>
 					<div class="col-md-5">
 						<input type="text" name="subject" id="subject" class="form-control required" value="${(order.subject)!}" htmlEscape="false" maxlength="32">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-md-3">支付调起方式<span class="required">*</span></label>
+					<label class="control-label col-md-3">支付调起方式</label>
 					<div class="col-md-5">
-						<@albedo.form name="invokeType" dictCode="invoke_type" cssClass="required" boxType="radio" value="${(order.invokeType)!}" > </@albedo.form>
+						<@albedo.form name="invokeType" dictCode="invoke_type" cssClass="" boxType="radio" value="${(order.invokeType)!}" > </@albedo.form>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-md-3">open_id<span class="required">*</span></label>
+					<label class="control-label col-md-3">订单完成时间</label>
 					<div class="col-md-5">
-						<input type="text" name="openId" id="openId" class="form-control required" value="${(order.openId)!}" htmlEscape="false" maxlength="128">
+						<div class="input-group date"><input type="text" name="finishTime" readonly class="form-control date-time-picker " value="${(order.finishTime)!}"><span class="input-group-btn"><button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button></span></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3">open_id</label>
+					<div class="col-md-5">
+						<input type="text" name="openId" id="openId" class="form-control" value="${(order.openId)!}" htmlEscape="false" maxlength="128">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3">附加参数</label>
+					<div class="col-md-5">
+						<input type="text" name="attach" id="attach" class="form-control" value="${(order.attach)!}" htmlEscape="false" maxlength="255">
 					</div>
 				</div>
 				<div class="form-group">

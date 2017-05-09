@@ -1,12 +1,12 @@
 package com.qingju.java.common.pay.core;
 
-import com.qingju.java.vo.pay.PayMsg;
+import com.qingju.java.vo.pay.PayCreate;
 
 /**
  * Created by lijie on 2017/5/3.
  */
 public interface PayInstance {
 
-    String create(PayMsg payMsg, String domain);
+    String genParams(PayCreate payCreate, String domain);
 
 }

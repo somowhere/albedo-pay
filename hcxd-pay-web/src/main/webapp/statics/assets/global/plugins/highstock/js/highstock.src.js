@@ -15252,7 +15252,7 @@ Series.prototype.setStackedPoints = function () {
 		stackIndicator = series.getStackIndicator(stackIndicator, x, series.index);
 		pointKey = stackIndicator.key;
 		// Read stacked values into a stack based on the x value,
-		// the sign of y and the stack key. Stacking is also handled for null values (#739)
+		// the base of y and the stack key. Stacking is also handled for null values (#739)
 		isNegative = negStacks && y < (stackThreshold ? 0 : threshold);
 		key = isNegative ? negKey : stackKey;
 

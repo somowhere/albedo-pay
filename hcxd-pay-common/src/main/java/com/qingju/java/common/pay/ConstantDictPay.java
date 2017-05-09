@@ -69,5 +69,9 @@ public class ConstantDictPay {
     public static final String WEIXIN_PAY_TAPP_SECRET = "WEIXIN_PAY_TAPP_SECRET";
     public static final String WEIXIN_PAY_TAPP_OAUTH2_API = "WEIXIN_PAY_TAPP_OAUTH2_API";
 
-    public static final String PAY_ARGS="pay_args";
+    public static final String PAY_DCIT_ARGS="pay_args";
+    public static final String PAY_DCIT_CONSTANT_WECHAT="pay_constant_wechat";
+    public static final String PAY_DCIT_CONSTANT_APLIPAY="pay_constant_alipay";
+
+
 }

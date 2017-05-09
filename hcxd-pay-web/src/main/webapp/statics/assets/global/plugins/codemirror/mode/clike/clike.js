@@ -515,7 +515,7 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
     blockKeywords: words("for while do if else struct"),
     builtin: words("radians degrees sin cos tan asin acos atan " +
                     "pow exp log exp2 sqrt inversesqrt " +
-                    "abs sign floor ceil fract mod min max clamp mix step smoothstep " +
+                    "abs base floor ceil fract mod min max clamp mix step smoothstep " +
                     "length distance dot cross normalize ftransform faceforward " +
                     "reflect refract matrixCompMult " +
                     "lessThan lessThanEqual greaterThan greaterThanEqual " +

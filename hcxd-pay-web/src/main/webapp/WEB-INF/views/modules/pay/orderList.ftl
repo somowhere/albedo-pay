@@ -17,27 +17,41 @@
             </div>
             <div class="portlet-body">
             	<form class="form-inline form-search" id="form-search-order">
-
-                        <div class="form-group">
-                            <label class="input-label" for="payStatus">支付状态</label>
-                        <@albedo.form name="payStatus" searchItem="searchItem" dictCode="order_pay_status" boxType="checkbox" value="${(order.payStatus)!}" operate="eq" attrType="Integer"> </@albedo.form>
-                        </div>
-                    <br/>
 						<div class="form-group">
 					        <label class="input-label" for="payCode">支付编码</label>
-							<input type="text" class="form-control" searchItem="searchItem" id="payCode" name="payCode" value="${(order.payCode)!}" attrType="String" operate="eq" htmlEscape="false" maxlength="32" placeholder="...">
+							<input type="text" class="form-control" searchItem="searchItem" id="payCode" name="payCode" value="${(order.payCode)!}" attrType="String" operate="like" htmlEscape="false" maxlength="32" placeholder="...">
 						</div>
 						<div class="form-group">
 					        <label class="input-label" for="bizCode">业务编码</label>
-							<input type="text" class="form-control" searchItem="searchItem" id="bizCode" name="bizCode" value="${(order.bizCode)!}" attrType="String" operate="eq" htmlEscape="false" maxlength="32" placeholder="...">
+							<input type="text" class="form-control" searchItem="searchItem" id="bizCode" name="bizCode" value="${(order.bizCode)!}" attrType="String" operate="like" htmlEscape="false" maxlength="32" placeholder="...">
+						</div>
+						<div class="form-group">
+					        <label class="input-label" for="tradeId">第三方交易编号</label>
+							<input type="text" class="form-control" searchItem="searchItem" id="tradeId" name="tradeId" value="${(order.tradeId)!}" attrType="String" operate="like" htmlEscape="false" maxlength="128" placeholder="...">
 						</div>
 						<div class="form-group">
 					        <label class="input-label" for="payType">支付类型</label>
-							<@albedo.form name="payType" searchItem="searchItem" dictCode="order_pay_type" boxType="checkbox" value="${(order.payType)!}" operate="eq" attrType="Integer"> </@albedo.form>
+							<@albedo.form name="payType" searchItem="searchItem" dictCode="order_pay_type" boxType="select" value="${(order.payType)!}" operate="eq" attrType="Integer"> </@albedo.form>
 						</div>
 						<div class="form-group">
 					        <label class="input-label" for="bizType">业务类型</label>
-							<@albedo.form name="bizType" searchItem="searchItem" dictCode="order_biz_type" boxType="checkbox" value="${(order.bizType)!}" operate="eq" attrType="Integer"> </@albedo.form>
+							<@albedo.form name="bizType" searchItem="searchItem" dictCode="order_biz_type" boxType="select" value="${(order.bizType)!}" operate="eq" attrType="Integer"> </@albedo.form>
+						</div>
+						<div class="form-group">
+					        <label class="input-label" for="clientIp">client_ip</label>
+							<input type="text" class="form-control" searchItem="searchItem" id="clientIp" name="clientIp" value="${(order.clientIp)!}" attrType="String" operate="eq" htmlEscape="false" maxlength="32" placeholder="...">
+						</div>
+						<div class="form-group">
+					        <label class="input-label" for="invokeType">支付调起方式</label>
+							<@albedo.form name="invokeType" searchItem="searchItem" dictCode="invoke_type" boxType="radio" value="${(order.invokeType)!}" operate="eq" attrType="Integer"> </@albedo.form>
+						</div>
+						<div class="form-group">
+					        <label class="input-label" for="finishTime">订单完成时间</label>
+							<div class="input-group date date-time-picker"><input type="text" name="finishTime" searchItem="searchItem" operate="eq" attrType="java.util.Date" readonly class="form-control" value="${(order.finishTime)!}"><span class="input-group-btn"><button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button></span></div>
+						</div>
+						<div class="form-group">
+					        <label class="input-label" for="payStatus">支付状态</label>
+							<@albedo.form name="payStatus" searchItem="searchItem" dictCode="order_pay_status" boxType="select" value="${(order.payStatus)!}" operate="eq" attrType="Integer"> </@albedo.form>
 						</div>
                          <div class="form-group form-btn">
                          <button class="btn btn-sm green btn-outline filter-submit-table-order margin-bottom" type="button"><i class="fa fa-search"></i> 查询</button>
@@ -51,13 +65,16 @@
                         <tr role="row" class="heading">
                         	<th class="all"> 支付编码 </th>
                         	<th class=""> 业务编码 </th>
+                        	<th class=""> 第三方交易编号 </th>
                         	<th class=""> 金额 </th>
                         	<th class=""> 支付类型 </th>
                         	<th class=""> 业务类型 </th>
-                        	<th class=""> 客户端ip </th>
-                        	<th class=""> 主题 </th>
-                        	<th class=""> 支付调起方式 </th>
+                        	<th class=""> client_ip </th>
+                        	<th class=""> subject_ </th>
+                        	<th class="none"> 支付调起方式 </th>
+                        	<th class="none"> 订单完成时间 </th>
                         	<th class="none"> open_id </th>
+                        	<th class="none"> 附加参数 </th>
                         	<th class="none"> 支付状态 </th>
                         	<th class="none"> 创建时间 </th>
                         	<th class="none"> 最后更新时间 </th>
@@ -93,6 +110,8 @@
 					}}
 					, {data:'bizCode'
 					}
+					, {data:'tradeId'
+					}
 					, {data:'amount'
 					}
 					, {data:'payType'
@@ -105,7 +124,11 @@
 					}
 					, {data:'invokeType'
 					}
+					, {data:'finishTime'
+					}
 					, {data:'openId'
+					}
+					, {data:'attach'
 					}
 					, {data:'payStatus'
 					}

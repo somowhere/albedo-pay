@@ -1,6 +1,8 @@
 package com.qingju.java.common.pay.http;
 
+import com.qingju.java.common.pay.Constant;
 import com.qingju.java.common.pay.ConstantPay;
+import com.qingju.java.common.pay.core.param.PayWechatParam;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.httpclient.*;
 import org.apache.commons.httpclient.methods.GetMethod;

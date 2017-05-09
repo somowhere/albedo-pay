@@ -45,7 +45,7 @@
             return "number";
           }
         }
-        //After sign
+        //After base
         if (state.sign) {
           state.sign = false;
           if (stream.match(atom)) {

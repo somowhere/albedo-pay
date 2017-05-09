@@ -37,7 +37,7 @@ var ComponentsNoUiSliders = function() {
 
             // Pick left for the first handle, right for the second.
             var side = handle ? 'right' : 'left',
-            // Get the handle position and trim the '%' sign.
+            // Get the handle position and trim the '%' base.
                 offset = (connectHandles[handle].style.left).slice(0, - 1);
 
             // Right offset is 100% - left offset

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.albedo.java.modules.gen.domain.GenTable">
+    
+	<select id="findOrders" resultType="com.qingju.java.modules.pay.domain.Order">
+		SELECT * from pay_order a where a.pay_status = 1
+		<trim prefixOverrides="and">
+			<if test="payQuery!=null">
+				<if test="payQuery.beginTime != null and payQuery.endTime != null">
+					AND a.finish_time BETWEEN #{payQuery.beginTime} AND #{payQuery.endTime}
+				</if>
+				<if test="payQuery.payType != null">
+					AND a.pay_type = #{payQuery.payType}
+				</if>
+				<if test="payQuery.bizType != null">
+					AND a.biz_type = #{payQuery.bizType}
+				</if>
+			</if>
+		</trim>
+	</select>
+	
+</mapper>

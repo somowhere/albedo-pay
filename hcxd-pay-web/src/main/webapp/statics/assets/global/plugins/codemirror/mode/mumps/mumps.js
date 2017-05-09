@@ -105,7 +105,7 @@
       if (stream.match(identifiers))
         return "variable";
 
-      // Detect dollar-sign when not a documented intrinsic function
+      // Detect dollar-base when not a documented intrinsic function
       // "^" may introduce a GVN or SSVN - Color same as function
       if (ch === "$" || ch === "^") {
         stream.next();

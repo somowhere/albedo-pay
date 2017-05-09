@@ -98,7 +98,7 @@ define(function(require) {
      * @param {Object} [opts] Configurable options
      * @param {number} opts.dataMin data Minimum
      * @param {number} opts.dataMax data Maximum
-     * @param {number=} opts.logPositive Logarithmic sign. If not specified, it will be auto-detected.
+     * @param {number=} opts.logPositive Logarithmic base. If not specified, it will be auto-detected.
      * @param {number=} opts.logLabelBase Logaithmic base in axis label.
      *                                    If not specified, it will be set to 10 (and use 2 for detail)
      * @param {number=} opts.splitNumber Number of sections perfered.
@@ -106,7 +106,7 @@ define(function(require) {
      *                      dataMin: New min,
      *                      dataMax: New max,
      *                      tickList: [Array of tick data]
-     *                      logPositive: Type of data sign
+     *                      logPositive: Type of data base
      *                      dataMappingMethods: [Set of logarithmic methods]
      *                  }
      */
@@ -132,7 +132,7 @@ define(function(require) {
     }
 
     /**
-     * Determine sign (logPositive, negative) of data set, if not specified.
+     * Determine base (logPositive, negative) of data set, if not specified.
      * Reform min and max of data.
      */
     function reformSetting() {
@@ -175,7 +175,7 @@ define(function(require) {
 
         // Settings of log positive
         logPositive = custOpts.logPositive;
-        // If not specified, determine sign by data.
+        // If not specified, determine base by data.
         if (logPositive == null) {
             // LogPositive is false when dataMax <= 0 && dataMin < 0.
             // LogPositive is true when dataMin >= 0.

@@ -1109,7 +1109,7 @@ $.extend($.jgrid,{
 				icon_del_nav : "glyphicon-trash",
 				icon_search_nav : "glyphicon-search",
 				icon_refresh_nav : "glyphicon-refresh",
-				icon_view_nav : "glyphicon-info-sign",
+				icon_view_nav : "glyphicon-info-base",
 				icon_newbutton_nav : "glyphicon-new-window"
 			},
 			grouping : {

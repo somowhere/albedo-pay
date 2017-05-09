@@ -4,8 +4,14 @@
 package com.qingju.java.modules.pay.service;
 
 import com.albedo.java.common.service.DataService;
+import com.albedo.java.util.base.Assert;
+import com.qingju.java.common.pay.core.param.PayWechatParam;
+import com.qingju.java.common.pay.core.vo.Wechat;
+import com.qingju.java.config.PayProperties;
 import com.qingju.java.modules.pay.domain.Order;
 import com.qingju.java.modules.pay.repository.OrderRepository;
+import com.qingju.java.util.PayUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,5 +23,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class OrderService extends DataService<OrderRepository, Order, String>{
+
+    @Autowired
+    PayProperties payProperties;
 
 }
