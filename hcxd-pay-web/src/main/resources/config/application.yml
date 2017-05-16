@@ -51,6 +51,7 @@ security:
 # ===================================================================
 
 albedo:
+    jedisKeyPrefix: hcxd-pay
     application: ${spring.application.name}
     adminPath: /a
     frontPath: /f

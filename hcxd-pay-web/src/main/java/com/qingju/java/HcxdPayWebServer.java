@@ -1,10 +1,12 @@
 package com.qingju.java;
 
-import com.albedo.java.common.config.AlbedoProperties;
-import com.albedo.java.common.config.template.FreeMarkerConfig;
-import com.albedo.java.util.domain.Globals;
-import com.albedo.java.util.spring.SpringContextHolder;
-import com.qingju.java.config.PayProperties;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Arrays;
+import java.util.Collection;
+
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +19,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 
-import javax.annotation.PostConstruct;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.Arrays;
-import java.util.Collection;
+import com.albedo.java.common.config.AlbedoProperties;
+import com.albedo.java.common.config.template.FreeMarkerConfig;
+import com.albedo.java.util.domain.Globals;
+import com.albedo.java.util.spring.SpringContextHolder;
+import com.qingju.java.pay.config.PayProperties;
 
 /**
  * Created by lijie on 2017/3/23.

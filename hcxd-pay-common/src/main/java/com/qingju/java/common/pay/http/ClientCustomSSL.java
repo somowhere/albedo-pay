@@ -26,17 +26,19 @@
  */
 package com.qingju.java.common.pay.http;
 
-import lombok.extern.slf4j.Slf4j;
+import java.io.IOException;
+import java.io.InputStream;
+import java.security.KeyStore;
+
+import javax.net.ssl.SSLContext;
+
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContexts;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
-import javax.net.ssl.SSLContext;
-import java.io.IOException;
-import java.io.InputStream;
-import java.security.KeyStore;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * This example demonstrates how to create secure connections with a custom SSL

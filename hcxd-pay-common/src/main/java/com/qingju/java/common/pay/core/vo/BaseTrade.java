@@ -1,16 +1,23 @@
 package com.qingju.java.common.pay.core.vo;
 
-import com.qingju.java.common.pay.http.HttpProtocolHandler;
-import com.qingju.java.common.pay.http.HttpRequest;
-import com.qingju.java.common.pay.http.HttpResponse;
-import com.qingju.java.common.pay.util.SignUtil;
-import lombok.extern.slf4j.Slf4j;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.UnsupportedEncodingException;
-import java.util.*;
+import com.qingju.java.common.pay.http.HttpProtocolHandler;
+import com.qingju.java.common.pay.http.HttpRequest;
+import com.qingju.java.common.pay.http.HttpResponse;
+import com.qingju.java.common.pay.util.SignUtil;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class BaseTrade {

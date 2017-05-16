@@ -1,18 +1,12 @@
 package com.qingju.java.modules.pay.service;
 
-import com.albedo.java.util.DateUtil;
-import com.albedo.java.util.PublicUtil;
-import com.qingju.java.common.pay.Constant;
-import com.qingju.java.common.pay.ConstantPay;
-import com.qingju.java.common.pay.core.TestConfig;
-import com.qingju.java.modules.pay.domain.Order;
-import com.qingju.java.modules.pay.domain.OrderLog;
-import com.qingju.java.modules.pay.repository.OrderLogRepository;
-import com.qingju.java.modules.pay.repository.OrderRepository;
-import com.qingju.java.vo.pay.PayCreate;
-import com.qingju.java.vo.pay.PayQuery;
-import com.qingju.java.vo.pay.PayUpdate;
-import lombok.extern.slf4j.Slf4j;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertThat;
+
+import java.math.BigDecimal;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,12 +16,21 @@ import org.springframework.boot.test.context.ConfigFileApplicationContextInitial
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.math.BigDecimal;
-import java.util.List;
+import com.albedo.java.util.DateUtil;
+import com.albedo.java.util.PublicUtil;
+import com.qingju.java.common.pay.Constant;
+import com.qingju.java.common.pay.ConstantPay;
+import com.qingju.java.common.pay.core.TestConfig;
+import com.qingju.java.pay.domain.Order;
+import com.qingju.java.pay.domain.OrderLog;
+import com.qingju.java.pay.repository.OrderLogRepository;
+import com.qingju.java.pay.repository.OrderRepository;
+import com.qingju.java.pay.service.PayService;
+import com.qingju.java.pay.vo.PayCreate;
+import com.qingju.java.pay.vo.PayQuery;
+import com.qingju.java.pay.vo.PayUpdate;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Created by lijie on 2017/5/15.

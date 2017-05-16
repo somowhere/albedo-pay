@@ -1,9 +1,9 @@
 package com.qingju.java.common.pay.base;
 
-import org.apache.commons.codec.digest.DigestUtils;
-
 import java.io.UnsupportedEncodingException;
 import java.security.SignatureException;
+
+import org.apache.commons.codec.digest.DigestUtils;
 
 /** 
 * 功能：支付宝MD5签名处理核心文件，不需要修改

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.qingju.java.modules.pay.domain.Order">
+<mapper namespace="com.qingju.java.pay.domain.Order">
 
 	<sql id="orderColumns">
 		a.id_ AS id,
@@ -26,8 +26,8 @@
 		a.version_ AS version
 	</sql>
 
-	<select id="findOrders" resultType="com.qingju.java.modules.pay.domain.Order"
-			parameterType="com.qingju.java.vo.pay.PayQuery">
+	<select id="findOrders" resultType="com.qingju.java.pay.domain.Order"
+			parameterType="com.qingju.java.pay.vo.PayQuery">
 		SELECT
 		<include refid="orderColumns"/>
 		from pay_order a

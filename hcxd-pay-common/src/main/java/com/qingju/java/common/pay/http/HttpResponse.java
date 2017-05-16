@@ -1,8 +1,8 @@
 package com.qingju.java.common.pay.http;
 
-import org.apache.commons.httpclient.Header;
-
 import java.io.UnsupportedEncodingException;
+
+import org.apache.commons.httpclient.Header;
 
 /* *
  *类名：HttpResponse

@@ -1,15 +1,15 @@
 package com.qingju.java.common.pay.core;
 
-import com.albedo.java.common.config.AlbedoProperties;
-import com.albedo.java.util.spring.SpringContextHolder;
-import com.qingju.java.config.PayProperties;
+import java.sql.SQLException;
+import java.util.Date;
+
+import javax.sql.DataSource;
+
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
-import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -17,7 +17,6 @@ import org.springframework.context.ResourceLoaderAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.mybatis.domains.AuditDateAware;
@@ -33,9 +32,9 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.sql.DataSource;
-import java.sql.SQLException;
-import java.util.Date;
+import com.albedo.java.common.config.AlbedoProperties;
+import com.albedo.java.util.spring.SpringContextHolder;
+import com.qingju.java.pay.config.PayProperties;
 
 /**
  * Created by lijie on 2017/5/15.
@@ -44,14 +43,14 @@ import java.util.Date;
  */
 @Configuration
 @EnableMybatisRepositories(
-        value = {"com.albedo.java.modules.*.repository", "com.qingju.java.modules.*.repository"},
+        value = {"com.albedo.java.modules.*.repository", "com.qingju.java.pay.*.repository"},
         mapperLocations = "classpath*:/mappings/modules/*/*Mapper.xml"
 )
 @EnableTransactionManagement
 @ComponentScan(basePackages = {"com.albedo.java.*","com.qingju.java.*"})
 @AutoConfigureAfter(value = RedisAutoConfiguration.class)
 @EnableConfigurationProperties({AlbedoProperties.class, PayProperties.class, RedisProperties.class})
-public class TestConfig implements ResourceLoaderAware  , ApplicationContextAware {
+public class TestConfig implements ResourceLoaderAware, ApplicationContextAware {
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {

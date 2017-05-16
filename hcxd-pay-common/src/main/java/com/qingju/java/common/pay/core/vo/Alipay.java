@@ -1,17 +1,18 @@
 package com.qingju.java.common.pay.core.vo;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.util.Map;
+
 import com.google.common.collect.Maps;
 import com.qingju.java.common.pay.ConstantPay;
 import com.qingju.java.common.pay.core.param.PayAlipayParam;
 import com.qingju.java.common.pay.http.HttpRequest;
 import com.qingju.java.common.pay.http.HttpResultType;
 import com.qingju.java.common.pay.util.XmlMapper;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.util.Map;
 
 /**
  * Created by taxus on 16-4-16.

@@ -1,5 +1,11 @@
 package com.qingju.java.common.pay.core.vo;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import org.apache.commons.collections.map.HashedMap;
+
 import com.albedo.java.util.Json;
 import com.albedo.java.util.base.Reflections;
 import com.alibaba.fastjson.JSONObject;
@@ -13,13 +19,9 @@ import com.qingju.java.common.pay.util.XmlMapper;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.apache.commons.collections.map.HashedMap;
-
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * Created by taxus on 16-4-21.

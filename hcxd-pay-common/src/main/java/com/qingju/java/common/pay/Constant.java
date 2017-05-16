@@ -12,9 +12,6 @@
  */
 package com.qingju.java.common.pay;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * 系统的全局常量on
  * Created by Liuyihua. on 2016/3/3.

@@ -1,8 +1,9 @@
 package com.qingju.java;
 
-import com.albedo.java.util.spring.DefaultProfileUtil;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+
+import com.albedo.java.util.spring.DefaultProfileUtil;
 
 /**
  * This is a helper Java class that provides an alternative to creating a web.xml.

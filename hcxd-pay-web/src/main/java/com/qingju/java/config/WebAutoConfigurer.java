@@ -1,6 +1,8 @@
 package com.qingju.java.config;
 
-import com.albedo.java.util.domain.Globals;
+import java.io.File;
+import java.nio.file.Paths;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +12,7 @@ import org.springframework.boot.context.embedded.MimeMappings;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
-import java.io.File;
-import java.nio.file.Paths;
+import com.albedo.java.util.domain.Globals;
 
 /**
  * Configuration of web application with Servlet 3.0 APIs.

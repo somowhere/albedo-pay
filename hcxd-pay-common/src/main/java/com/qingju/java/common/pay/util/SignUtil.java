@@ -1,16 +1,15 @@
 package com.qingju.java.common.pay.util;
 
-import com.qingju.java.common.pay.ConstantPay;
-import com.qingju.java.common.pay.core.param.PayWechatParam;
-import com.qingju.java.common.pay.base.MD5;
-import com.qingju.java.common.pay.base.RSA;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
+import com.qingju.java.common.pay.ConstantPay;
+import com.qingju.java.common.pay.base.MD5;
+import com.qingju.java.common.pay.base.RSA;
 
 /**
  * Created by lijie on 2017/5/8.

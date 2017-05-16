@@ -1,25 +1,23 @@
 package com.qingju.java.common.pay.core;
 
-import com.albedo.java.modules.sys.domain.Dict;
-import com.albedo.java.modules.sys.service.DictService;
-import com.qingju.java.common.pay.Constant;
-import com.qingju.java.common.pay.ConstantPay;
-import com.qingju.java.common.pay.core.param.PayAlipayParam;
-import com.qingju.java.common.pay.core.param.PayWechatParam;
-import com.qingju.java.common.pay.core.vo.Wechat;
-import com.qingju.java.config.PayProperties;
-import com.qingju.java.util.PayUtil;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertThat;
+
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import com.albedo.java.modules.sys.service.DictService;
+import com.qingju.java.common.pay.Constant;
+import com.qingju.java.common.pay.ConstantPay;
+import com.qingju.java.common.pay.core.param.PayWechatParam;
+import com.qingju.java.common.pay.core.vo.Wechat;
+import com.qingju.java.pay.config.PayProperties;
+import com.qingju.java.pay.util.PayUtil;
 
 
 /**

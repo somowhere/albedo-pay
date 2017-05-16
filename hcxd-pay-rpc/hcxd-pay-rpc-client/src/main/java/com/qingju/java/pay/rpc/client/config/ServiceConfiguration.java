@@ -1,11 +1,12 @@
 package com.qingju.java.pay.rpc.client.config;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
 import com.albedo.java.thrift.rpc.client.proxy.ServiceStarter;
 import com.albedo.java.thrift.rpc.common.vo.ServiceApi;
 import com.qingju.java.rpc.pay.service.thrift.PayThriftService;
 import com.qingju.java.rpc.pay.service.thrift.ThriftServiceConstant;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * Created by lijie on 2017/4/12.
