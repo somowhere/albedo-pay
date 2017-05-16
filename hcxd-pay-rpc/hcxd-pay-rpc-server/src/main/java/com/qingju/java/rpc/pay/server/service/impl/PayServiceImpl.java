@@ -4,7 +4,7 @@ import com.albedo.java.grpc.server.GrpcService;
 import com.alibaba.fastjson.JSON;
 import com.qingju.java.pay.domain.Order;
 import com.qingju.java.pay.service.PayService;
-import com.qingju.java.pay.vo.GrpcMessage;
+import com.qingju.java.pay.vo.DataMessage;
 import com.qingju.java.pay.vo.PayCreate;
 import com.qingju.java.pay.vo.PayQuery;
 import com.qingju.java.rpc.pay.server.util.GrpcUtil;
@@ -32,7 +32,7 @@ public class PayServiceImpl extends PayServiceGrpc.PayServiceImplBase {
 		PayCreate payCreate = JSON.parseObject(request.getData(), PayCreate.class);
 		Order order = payService.create(payCreate);
 
-		GrpcUtil.response(GrpcMessage.createData(GrpcPayConstant.DATA_RESPONSE_STATUS_SUCCESS, order.getPayCode()),
+		GrpcUtil.response(DataMessage.createData(GrpcPayConstant.DATA_RESPONSE_STATUS_SUCCESS, order.getPayCode()),
 				responseObserver);
 
 	}
@@ -41,7 +41,7 @@ public class PayServiceImpl extends PayServiceGrpc.PayServiceImplBase {
 	public void query(PayRequest request, StreamObserver<DataResponse> responseObserver) {
 		PayQuery payQuery = JSON.parseObject(request.getData(), PayQuery.class);
 		String orderJson = payService.query(payQuery);
-		GrpcUtil.response(GrpcMessage.createData(GrpcPayConstant.DATA_RESPONSE_STATUS_SUCCESS, orderJson),
+		GrpcUtil.response(DataMessage.createData(GrpcPayConstant.DATA_RESPONSE_STATUS_SUCCESS, orderJson),
 				responseObserver);
 	}
 }

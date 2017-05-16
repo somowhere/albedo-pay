@@ -1,6 +1,6 @@
 package com.qingju.java.rpc.pay.server.util;
 
-import com.qingju.java.pay.vo.GrpcMessage;
+import com.qingju.java.pay.vo.DataMessage;
 import com.qingju.java.rpc.pay.service.grpc.DataResponse;
 import io.grpc.stub.StreamObserver;
 
@@ -11,7 +11,7 @@ import io.grpc.stub.StreamObserver;
  */
 public class GrpcUtil {
 
-	public static void response(GrpcMessage grpcMessage, StreamObserver<DataResponse> responseObserver) {
+	public static void response(DataMessage grpcMessage, StreamObserver<DataResponse> responseObserver) {
 		DataResponse reply = DataResponse.newBuilder().setStatus(grpcMessage.getStatus()).setMsg(grpcMessage.getMsg())
 				.setData(grpcMessage.getData()).build();
 		responseObserver.onNext(reply);

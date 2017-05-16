@@ -1,13 +1,14 @@
 package com.qingju.java.rpc.pay.server.controller;
 
+import com.qingju.java.pay.service.PayService;
+import com.qingju.java.pay.vo.DataMessage;
+import com.qingju.java.pay.vo.PayUpdate;
+import com.qingju.java.rpc.pay.service.GrpcPayConstant;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.qingju.java.pay.service.PayService;
-import com.qingju.java.pay.vo.PayUpdate;
-
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by lijie on 2017/5/4.
@@ -21,9 +22,10 @@ public class OrderController {
 	PayService payService;
 
 	@RequestMapping("/update")
-	public String update(PayUpdate payUpdate) {
+	@ResponseBody
+	public DataMessage update(PayUpdate payUpdate) {
 		payService.update(payUpdate);
-		return "success";
+		return DataMessage.createMsg(GrpcPayConstant.DATA_RESPONSE_STATUS_SUCCESS, "操作成功");
 	}
 
 }
