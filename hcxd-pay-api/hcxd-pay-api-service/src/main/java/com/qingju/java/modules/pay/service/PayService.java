@@ -2,6 +2,7 @@ package com.qingju.java.modules.pay.service;
 
 import com.albedo.java.util.HttpUtil;
 import com.albedo.java.util.InputStreamUtils;
+import com.albedo.java.util.Json;
 import com.albedo.java.util.PublicUtil;
 import com.albedo.java.util.base.Assert;
 import com.qingju.java.common.pay.Constant;
@@ -62,11 +63,17 @@ public class PayService {
         return params;
     }
 
-    public List<Order> query(PayQuery payQuery){
+    public List<Order> queryOrdes(PayQuery payQuery){
         Assert.assertNotNull(payQuery,"订单查询参数不能为空");
         List<Order> orderList = orderRepository.findOrders(payQuery);
         return orderList;
     }
+
+    public String query(PayQuery payQuery){
+        List<Order> orderList = queryOrdes(payQuery);
+        return Json.toJsonString(orderList);
+    }
+
 
     public void update(PayUpdate payUpdate){
         Assert.assertNotNull(payUpdate,"订单更新参数不能为空");

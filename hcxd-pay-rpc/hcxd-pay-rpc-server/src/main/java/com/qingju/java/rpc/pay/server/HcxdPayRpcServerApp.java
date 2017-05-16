@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
@@ -22,7 +21,6 @@ import java.util.Collection;
  * Created by lijie on 2017/5/4.
  */
 @SpringBootApplication
-@EnableDiscoveryClient
 @ComponentScan(basePackages = {"com.albedo.java.*", "com.qingju.java.*"})
 public class HcxdPayRpcServerApp {
     private static final Logger log = LoggerFactory.getLogger(HcxdPayRpcServerApp.class);

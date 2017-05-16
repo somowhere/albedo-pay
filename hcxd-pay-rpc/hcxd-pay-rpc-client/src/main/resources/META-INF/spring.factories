@@ -1,0 +1,3 @@
+# Auto Configuration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.qingju.java.pay.rpc.client.config.ServiceConfiguration

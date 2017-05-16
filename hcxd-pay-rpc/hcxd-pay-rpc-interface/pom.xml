@@ -10,6 +10,48 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>hcxd-pay-rpc-interface</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.albedo.java</groupId>
+            <artifactId>albedo-thrift-common</artifactId>
+            <version>${albedo.version}</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <executions>
+            <execution>
+            <id>compile-thrift</id>
+            <phase>generate-sources</phase>
+            <configuration>
+            <tasks>
+            <!--<mkdir dir="src/main/java/com/anjuke/demo/thrift/auto"/>-->
+            <path id="thrift.path">
+            <fileset dir="${project.basedir}/src/main/resources">
+            <include name="**/*.thrift"/>
+            </fileset>
+            </path>
+            <pathconvert pathsep=" " property="thrift.files" refid="thrift.path"/>
+            <exec executable="thrift">
+            <arg value="-r --gen"/>
+            <arg value="java"/>
+            <arg value="-out"/>
+            <arg value="src/main/java"/>
+            <arg line="${thrift.files}"/>
+            </exec>
+            </tasks>
+            <sourceRoot>src/main/java/</sourceRoot>
+            </configuration>
+            <goals>
+            <goal>run</goal>
+            </goals>
+            </execution>
+            </executions>
+            </plugin>
 
+        </plugins>
 
+    </build>
 </project>
