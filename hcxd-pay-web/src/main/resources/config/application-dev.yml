@@ -83,7 +83,6 @@ server:
 # ===================================================================
 
 albedo:
-    jedisKeyPrefix: albedo-metronic
     developMode: true
     isTokenInterceptor: false
     freeURL:
@@ -118,3 +117,6 @@ albedo:
             port: 5000
             queueSize: 512
 
+pay:
+    domain: 127.0.0.1
+    appDomain: 127.0.0.1

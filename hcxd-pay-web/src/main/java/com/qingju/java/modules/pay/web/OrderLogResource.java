@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 订单日志Controller 订单日志
  * @author lj
- * @version 2017-05-05
+ * @version 2017-05-16
  */
 @Controller
 @RequestMapping(value = "${albedo.adminPath}/pay/orderLog")
@@ -41,7 +41,7 @@ public class OrderLogResource extends DataResource<OrderLogService, OrderLog> {
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public String list() {
-		return "mappings/modules/pay/orderLogList";
+		return "modules/pay/orderLogList";
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class OrderLogResource extends DataResource<OrderLogService, OrderLog> {
 		if(orderLog == null){
 			throw new RuntimeMsgException(PublicUtil.toAppendStr("查询订单日志失败，原因：无法查找到编号为[", request.getParameter("id"), "]的订单日志"));
 		}
-		return "mappings/modules/pay/orderLogForm";
+		return "modules/pay/orderLogForm";
 	}
 
 	/**

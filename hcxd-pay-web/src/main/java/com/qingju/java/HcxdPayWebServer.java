@@ -4,6 +4,7 @@ import com.albedo.java.common.config.AlbedoProperties;
 import com.albedo.java.common.config.template.FreeMarkerConfig;
 import com.albedo.java.util.domain.Globals;
 import com.albedo.java.util.spring.SpringContextHolder;
+import com.qingju.java.config.PayProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ import java.util.Collection;
  */
 @ComponentScan(basePackages = {"com.albedo.java.*", "com.qingju.java.*"})
 @EnableAutoConfiguration(exclude = {MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class})
-@EnableConfigurationProperties({AlbedoProperties.class})
+@EnableConfigurationProperties({AlbedoProperties.class, PayProperties.class})
 public class HcxdPayWebServer {
 
 

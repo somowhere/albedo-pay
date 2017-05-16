@@ -41,7 +41,7 @@
 //    	try {
 //            String verifySign = SignUtil.buildRequestMysign(params,
 //					PayWechatParam.TRADE_TYPE_WEIXIN, PayWechatParam.W, false);
-//            if(params.get("base").equals(verifySign)){
+//            if(params.get("sign").equals(verifySign)){
 //            	flag=true;
 //            }
 //		} catch (Exception e) {

@@ -41,7 +41,7 @@ public class OrderArgsResource extends DataResource<OrderArgsService, OrderArgs>
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public String list() {
-		return "mappings/modules/pay/orderArgsList";
+		return "modules/pay/orderArgsList";
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class OrderArgsResource extends DataResource<OrderArgsService, OrderArgs>
 		if(orderArgs == null){
 			throw new RuntimeMsgException(PublicUtil.toAppendStr("查询支付参数失败，原因：无法查找到编号为[", request.getParameter("id"), "]的支付参数"));
 		}
-		return "mappings/modules/pay/orderArgsForm";
+		return "modules/pay/orderArgsForm";
 	}
 
 	/**

@@ -107,15 +107,45 @@ public class Constant {
     public static final int PAY_INVOKE_JS = 2;
 
     /**
-     * 支付类型1: 支付宝, 2: 微信
+     * 业务类型 1:基础类型
      */
-    public static final int ORDER_PAY_TYPE_ALIPAY = 1;
-    public static final int ORDER_PAY_TYPE_WECHAT = 2;
+    public static final int ORDER_TYPE_BIZ_BASE = 1;
+
+
+    /**
+     * 支付日志改变类型 1:优惠券变更
+     */
+    public static final int ORDER_LOG_CHANGE_TYPE_1 = 1;
+
+    /**
+     * 支付状态 0：待支付
+     */
+    public static final int ORDER_PAY_STATUS_WAIT_PAY = 0;
+    /**
+     * 支付状态 1：支付成功
+     */
+    public static final int ORDER_PAY_STATUS_SUCEESS = 1;
+    /**
+     * 支付状态 2：支付失败
+     */
+    public static final int ORDER_PAY_STATUS_FAILED = 2;
+    /**
+     * 支付状态 3：退款
+     */
+    public static final int ORDER_PAY_STATUS_REFUND = 3;
+    /**
+     * 支付状态 4：关闭
+     */
+    public static final int ORDER_PAY_STATUS_CLOSE = 4;
+
+
+
 
     /**
      * 业务类型 1:基础类型
      */
-    public static final int ORDER_TYPE_BIZ_BASE = 1;
+    public static final String REDIS_RECEVER_UPDATE_PAY_ARGS_PARAMS = "REDIS_RECEVER_UPDATE_PAY_ARGS_PARAMS";
+
 
 
 }

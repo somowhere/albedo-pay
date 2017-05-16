@@ -12,11 +12,16 @@ import java.util.Date;
 @Data @ToString
 public class PayQuery {
 
-    /** beginTime 开始时间 */
-    private Date beginTime;
-    /** endTime 结束时间 */
-    private Date endTime;
+    /** beginCreateTime 订单创建 开始时间 */
+    private Date beginCreateTime;
+    /** endCreateTime 订单创建 结束时间 */
+    private Date endCreateTime;
     /** payType 支付类型 */
     private Integer payType;
+    /** payStatus 支付类型 */
+    private Integer payStatus;
+    /** bizType 业务类型 */
+    private Integer bizType;
+
 
 }

@@ -19,15 +19,11 @@
             	<form class="form-inline form-search" id="form-search-orderLog">
 						<div class="form-group">
 					        <label class="input-label" for="orderId">支付id</label>
-							<input type="text" class="form-control" searchItem="searchItem" id="orderId" name="orderId" value="${(orderLog.orderId)!}" attrType="String" operate="eq" htmlEscape="false" maxlength="32" placeholder="...">
+							<input type="text" class="form-control" searchItem="searchItem" id="orderId" name="orderId" value="${(orderLog.orderId)!}" attrType="String" operate="like" htmlEscape="false" maxlength="32" placeholder="...">
 						</div>
 						<div class="form-group">
 					        <label class="input-label" for="type">类型</label>
-							<input type="text" class="form-control" searchItem="searchItem" id="type" name="type" value="${(orderLog.type)!}" attrType="Integer" operate="eq" htmlEscape="false" maxlength="4" placeholder="...">
-						</div>
-						<div class="form-group">
-					        <label class="input-label" for="sourceId">源编号</label>
-							<input type="text" class="form-control" searchItem="searchItem" id="sourceId" name="sourceId" value="${(orderLog.sourceId)!}" attrType="String" operate="eq" htmlEscape="false" maxlength="32" placeholder="...">
+							<@albedo.form name="type" searchItem="searchItem" dictCode="order_log_change_type" boxType="select" value="${(orderLog.type)!}" operate="eq" attrType="Integer"> </@albedo.form>
 						</div>
                          <div class="form-group form-btn">
                          <button class="btn btn-sm green btn-outline filter-submit-table-orderLog margin-bottom" type="button"><i class="fa fa-search"></i> 查询</button>
@@ -44,8 +40,6 @@
                         	<th class=""> 改变前金额 </th>
                         	<th class=""> 改变后金额 </th>
                         	<th class=""> 源编号 </th>
-                        	<th class=""> 创建时间 </th>
-                        	<th class="none"> 最后更新时间 </th>
                         <#if SecurityUtil.hasPermission('pay_orderLog_edit,pay_orderLog_delete,pay_orderLog_lock')><th width="10%"> 操作 </th></#if>
                         </tr>
                         </thead>
@@ -83,10 +77,6 @@
 					, {data:'after'
 					}
 					, {data:'sourceId'
-					}
-					, {data:'createdDate'
-					}
-					, {data:'lastModifiedDate'
 					}
 					<#if SecurityUtil.hasPermission('pay_orderLog_edit,pay_orderLog_delete,pay_orderLog_lock')>, 
                        { orderable: false, data: function ( row, type, val, meta ) {

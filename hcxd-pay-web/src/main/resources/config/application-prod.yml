@@ -128,3 +128,7 @@ albedo:
             host: localhost
             port: 5000
             queueSize: 512
+
+pay:
+    domain: 127.0.0.1
+    appDomain: 127.0.0.1

@@ -15,5 +15,6 @@ import com.qingju.java.modules.pay.domain.OrderLog;
  */
 public interface OrderLogRepository extends BaseRepository<OrderLog, String> {
 
-	
+
+    OrderLog findOneByOrderId(String id);
 }

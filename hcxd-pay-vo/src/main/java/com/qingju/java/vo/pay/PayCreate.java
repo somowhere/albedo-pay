@@ -24,7 +24,7 @@ public class PayCreate {
     /** subject subject_ */
     private String subject;
     /** invokeType 支付调起方式1: app, 2: js */
-    private Integer invokeType;
+    private int invokeType;
     /** openId open_id */
     private String openId;
     /** attach 附加参数 */

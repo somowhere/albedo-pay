@@ -76,6 +76,8 @@ public class Wechat extends BaseTrade {
         this.trade_type = payWechatParam.getPayTradeTypeApp();
 
         this.notify_url = domain + ConstantPay.PAY_WECHAT_NOTIFY_URL;
+
+        this.payWechatParam = payWechatParam;
     }
 
     /**
@@ -93,7 +95,7 @@ public class Wechat extends BaseTrade {
             params.put("prepayid", prepayId);
         }
         this.sign(params);
-        params.put("base", sign);
+        params.put("sign", sign);
         return Json.toJsonString(params);
     }
 
@@ -120,13 +122,14 @@ public class Wechat extends BaseTrade {
      * 验证接口
      */
     public boolean notifyVerify (Map<String, Object> params) {
-        String sign = (String) params.remove("base");
+        String sign = (String) params.remove("sign");
         sign(params);
         return this.sign.equals(sign);
     }
 
     private String preTrade(int invokeType){
         Map<String, Object> map = (Map<String, Object>) Reflections.bean2Map(this);
+        map.remove("payWechatParam");
         if (Constant.PAY_INVOKE_JS == invokeType) {
             this.appid = payWechatParam.getPayTappId();
             this.trade_type = payWechatParam.getPayTradeTypeJsapi();
@@ -136,12 +139,12 @@ public class Wechat extends BaseTrade {
         } else {
             map.remove("openid");
         }
-        map.remove("base");
+        map.remove("sign");
         this.sign(map);
         String result = sslXmlPost(payWechatParam.getPayUnifiedOrderApi(), payWechatParam.getPayFileCert(),
                 payWechatParam.getPayCertPass(), this.xmlString());
         Map<String, Object> resultMap = XmlMapper.xmlToMap(result);
-        String resultSign = (String) resultMap.remove("base");
+        String resultSign = (String) resultMap.remove("sign");
         this.sign(resultMap);
         AssertHandler.isTrue(sign.equals(resultSign) && "SUCCESS".equals(resultMap.get("result_code")),
             (String) resultMap.get("err_code_des"));
@@ -159,7 +162,7 @@ public class Wechat extends BaseTrade {
         map.put("nonce_str", this.nonce_str);
         map.put("out_trade_no", orderCode);
         sign(map);
-        map.put("base", this.sign);
+        map.put("sign", this.sign);
         String xml = XmlMapper.map2SimplXml(map);
         String result = sslXmlPost(payWechatParam.getPayQueryOrderApi(), payWechatParam.getPayFileCert(),
                 payWechatParam.getPayCertPass(), xml
@@ -234,7 +237,7 @@ public class Wechat extends BaseTrade {
         params.put("spbill_create_ip", "114.55.73.189");
 
         String mysign = buildRequestMysign(params, ConstantPay.TRADE_TYPE_WEIXIN, payWechatParam.getPayApiKey(), true);
-        params.put("base", mysign);
+        params.put("sign", mysign);
 
         String xml = XmlMapper.map2SimplXml(params);
         String result = sslXmlPost(payWechatParam.getPayTransfersApi(), certFile,

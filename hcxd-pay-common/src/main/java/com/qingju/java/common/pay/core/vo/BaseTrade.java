@@ -152,7 +152,7 @@ public class BaseTrade {
 		}
 		for (String key : map.keySet()) {
 			String value = (String) map.get(key);
-			if (value == null || value.equals("") || key.equalsIgnoreCase("base")
+			if (value == null || value.equals("") || key.equalsIgnoreCase("sign")
 					|| key.equalsIgnoreCase("sign_type")) {
 				continue;
 			}

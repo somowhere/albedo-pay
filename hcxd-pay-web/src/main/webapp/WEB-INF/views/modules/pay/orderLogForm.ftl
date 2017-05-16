@@ -31,7 +31,7 @@
 				<div class="form-group">
 					<label class="control-label col-md-3">类型<span class="required">*</span></label>
 					<div class="col-md-5">
-						<input type="text" name="type" id="type" class="form-control required digits" value="${(orderLog.type)!}" htmlEscape="false" maxlength="4">
+						<@albedo.form name="type" dictCode="order_log_change_type" cssClass="required" boxType="select" value="${(orderLog.type)!}" > </@albedo.form>
 					</div>
 				</div>
 				<div class="form-group">

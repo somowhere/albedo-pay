@@ -134,7 +134,7 @@ public class Alipay extends BaseTrade {
         param.put("it_b_pay", it_b_pay);
         param.put("return_url", return_url);
         sign(param, false);
-        param.put("base", sign);
+        param.put("sign", sign);
         param.put("sign_type", sign_type);
         return createLinkStringWithQuote(param);
     }
@@ -154,7 +154,7 @@ public class Alipay extends BaseTrade {
 //        params.put("email", seller_id);
 //        params.put("pay_date", DateUtil.getDate());
 //        params.put("buyer_account_name", seller_id);
-//        params.put("base", buildRequestMysign(params, ConstantPay.TRADE_TYPE_ALIPAY, payAlipayParam.getKeyPri(), true));
+//        params.put("sign", buildRequestMysign(params, ConstantPay.TRADE_TYPE_ALIPAY, payAlipayParam.getKeyPri(), true));
 //        params.put("sign_type", sign_type);
 //    }
 
@@ -170,7 +170,7 @@ public class Alipay extends BaseTrade {
         map.put("service", payAlipayParam.getQueryServiceApi());
         sign(map, true);
         map.put("sign_type", sign_type);
-        map.put("base", sign);
+        map.put("sign", sign);
         this.request.setUrl(payAlipayParam.getGateway());
         this.request.setParameters(convert(map));
         String result = super.get(this.request);
