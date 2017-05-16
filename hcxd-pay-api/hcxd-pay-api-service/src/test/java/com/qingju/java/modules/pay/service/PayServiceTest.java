@@ -52,7 +52,8 @@ public class PayServiceTest {
 
     public String orderCodeAlipay = PublicUtil.getRandomString(4) + PublicUtil.getCurrentTime("yyyyMMddHHmmss");
     public String orderCodeWechat = PublicUtil.getRandomString(4) + PublicUtil.getCurrentTime("yyyyMMddHHmmss");
-
+    public String orderPayCodeAlipay = PublicUtil.getRandomString(4) + PublicUtil.getCurrentTime("yyyyMMddHHmmss");
+    public String orderPayCodeWechat = PublicUtil.getRandomString(4) + PublicUtil.getCurrentTime("yyyyMMddHHmmss");
     @Before
     public void beforeInit(){
         PayCreate payCreate = new PayCreate();
@@ -62,7 +63,8 @@ public class PayServiceTest {
         payCreate.setBizType(Constant.ORDER_TYPE_BIZ_BASE);
         payCreate.setSubject("我是支付宝测试订单啊");
         payCreate.setPayType(ConstantPay.TRADE_TYPE_ALIPAY);
-        payService.create(payCreate);
+        Order order = payService.create(payCreate);
+        orderPayCodeAlipay = order.getPayCode();
         log.info("payCreate {}", payCreate);
         assertThat(payCreate, is(notNullValue()));
         payCreate = new PayCreate();
@@ -73,7 +75,8 @@ public class PayServiceTest {
         payCreate.setSubject("我是微信App测试订单啊");
         payCreate.setAttach(orderCodeWechat);
         payCreate.setPayType(ConstantPay.TRADE_TYPE_WEIXIN);
-        payService.create(payCreate);
+        order = payService.create(payCreate);
+        orderPayCodeWechat = order.getPayCode();
         log.info("payCreate {}", payCreate);
         assertThat(payCreate, is(notNullValue()));
     }
@@ -103,7 +106,7 @@ public class PayServiceTest {
         payQuery.setBeginCreateTime(DateUtil.addHours(PublicUtil.getCurrentDate(), -1));
         payQuery.setEndCreateTime(DateUtil.addHours(PublicUtil.getCurrentDate(), +1));
         payQuery.setPayStatus(Constant.ORDER_PAY_STATUS_WAIT_PAY);
-        List<Order> orders = payService.queryOrdes(payQuery);
+        List<Order> orders = payService.queryOrders(payQuery);
         assertThat(orders.size()>0, is(true));
         payQuery = new PayQuery();
         payQuery.setPayType(ConstantPay.TRADE_TYPE_WEIXIN);
@@ -111,7 +114,7 @@ public class PayServiceTest {
         payQuery.setBeginCreateTime(DateUtil.addHours(PublicUtil.getCurrentDate(), -1));
         payQuery.setEndCreateTime(DateUtil.addHours(PublicUtil.getCurrentDate(), +1));
         payQuery.setPayStatus(Constant.ORDER_PAY_STATUS_WAIT_PAY);
-        orders = payService.queryOrdes(payQuery);
+        orders = payService.queryOrders(payQuery);
         assertThat(orders.size()>2, is(true));
     }
 
@@ -122,7 +125,7 @@ public class PayServiceTest {
         Order orderBefore = payService.findOneByBizCode(orderCodeAlipay);
         BigDecimal bd = new BigDecimal(0.02);
         PayUpdate payUpdate = new PayUpdate();
-        payUpdate.setBizCode(orderCodeAlipay);
+        payUpdate.setPayCode(orderPayCodeAlipay);
         payUpdate.setAmount(bd);
         payUpdate.setChangeType(Constant.ORDER_LOG_CHANGE_TYPE_1);
         payService.update(payUpdate);
@@ -137,7 +140,7 @@ public class PayServiceTest {
         orderBefore = payService.findOneByBizCode(orderCodeWechat);
         bd = new BigDecimal(0.02);
         payUpdate = new PayUpdate();
-        payUpdate.setBizCode(orderCodeWechat);
+        payUpdate.setPayCode(orderPayCodeWechat);
         payUpdate.setAmount(bd);
         payUpdate.setChangeType(Constant.ORDER_LOG_CHANGE_TYPE_1);
         payService.update(payUpdate);

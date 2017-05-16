@@ -15,6 +15,7 @@
         <module>hcxd-pay-rpc-interface</module>
         <module>hcxd-pay-rpc-server</module>
         <module>hcxd-pay-rpc-client</module>
+        <module>hcxd-pay-erueka-server</module>
     </modules>
 
     <dependencyManagement>

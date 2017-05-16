@@ -7,6 +7,7 @@ import java.util.Collection;
 
 import javax.annotation.PostConstruct;
 
+import com.netflix.appinfo.EurekaInstanceConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
@@ -27,6 +30,8 @@ import com.qingju.java.pay.config.PayProperties;
 /**
  * Created by lijie on 2017/5/4.
  */
+@EnableEurekaClient
+@EnableDiscoveryClient
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.albedo.java.*", "com.qingju.java.*"})
 @EnableConfigurationProperties({AlbedoProperties.class, PayProperties.class, RedisProperties.class})

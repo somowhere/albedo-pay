@@ -13,43 +13,73 @@
     <dependencies>
         <dependency>
             <groupId>com.albedo.java</groupId>
-            <artifactId>albedo-thrift-common</artifactId>
+            <artifactId>albedo-grpc-common</artifactId>
             <version>${albedo.version}</version>
         </dependency>
     </dependencies>
     <build>
+
+        <extensions>
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>1.4.1.Final</version>
+            </extension>
+        </extensions>
         <plugins>
+             <!--grpc -->
             <plugin>
-            <artifactId>maven-antrun-plugin</artifactId>
+            <groupId>org.xolstice.maven.plugins</groupId>
+            <artifactId>protobuf-maven-plugin</artifactId>
+            <version>0.5.0</version>
+            <configuration>
+            <!-- The version of protoc must match protobuf-java. If you don't depend
+            on protobuf-java directly, you will be transitively depending on the protobuf-java
+            version that grpc depends on. -->
+            <protocArtifact>com.google.protobuf:protoc:3.2.0:exe:${os.detected.classifier}</protocArtifact>
+            <pluginId>grpc-java</pluginId>
+            <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.2.0:exe:${os.detected.classifier}</pluginArtifact>
+            </configuration>
             <executions>
             <execution>
-            <id>compile-thrift</id>
-            <phase>generate-sources</phase>
-            <configuration>
-            <tasks>
-            <!--<mkdir dir="src/main/java/com/anjuke/demo/thrift/auto"/>-->
-            <path id="thrift.path">
-            <fileset dir="${project.basedir}/src/main/resources">
-            <include name="**/*.thrift"/>
-            </fileset>
-            </path>
-            <pathconvert pathsep=" " property="thrift.files" refid="thrift.path"/>
-            <exec executable="thrift">
-            <arg value="-r --gen"/>
-            <arg value="java"/>
-            <arg value="-out"/>
-            <arg value="src/main/java"/>
-            <arg line="${thrift.files}"/>
-            </exec>
-            </tasks>
-            <sourceRoot>src/main/java/</sourceRoot>
-            </configuration>
             <goals>
-            <goal>run</goal>
+            <goal>compile</goal>
+            <goal>compile-custom</goal>
             </goals>
             </execution>
             </executions>
             </plugin>
+            <!--<plugin>-->
+            <!--<artifactId>maven-antrun-plugin</artifactId>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<id>compile-thrift</id>-->
+            <!--<phase>generate-sources</phase>-->
+            <!--<configuration>-->
+            <!--<tasks>-->
+            <!--&lt;!&ndash;<mkdir dir="src/main/java/com/anjuke/demo/thrift/auto"/>&ndash;&gt;-->
+            <!--<path id="thrift.path">-->
+            <!--<fileset dir="${project.basedir}/src/main/resources">-->
+            <!--<include name="**/*.thrift"/>-->
+            <!--</fileset>-->
+            <!--</path>-->
+            <!--<pathconvert pathsep=" " property="thrift.files" refid="thrift.path"/>-->
+            <!--<exec executable="thrift">-->
+            <!--<arg value="-r &#45;&#45;gen"/>-->
+            <!--<arg value="java"/>-->
+            <!--<arg value="-out"/>-->
+            <!--<arg value="src/main/java"/>-->
+            <!--<arg line="${thrift.files}"/>-->
+            <!--</exec>-->
+            <!--</tasks>-->
+            <!--<sourceRoot>src/main/java/</sourceRoot>-->
+            <!--</configuration>-->
+            <!--<goals>-->
+            <!--<goal>run</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
 
         </plugins>
 

@@ -11,8 +11,8 @@ import lombok.ToString;
 @Data @ToString
 public class PayUpdate {
 
-    /** bizCode 业务编码 */
-    private String bizCode;
+    /** payCode 支付编码 */
+    private String payCode;
     /** amount 金额 */
     private BigDecimal amount;
     /** changeType 变更类型 */

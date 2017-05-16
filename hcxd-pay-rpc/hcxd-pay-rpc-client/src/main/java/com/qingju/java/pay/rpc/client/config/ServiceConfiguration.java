@@ -1,26 +1,30 @@
 package com.qingju.java.pay.rpc.client.config;
 
+import com.albedo.java.grpc.client.GlobalClientInterceptorConfigurerAdapter;
+import com.albedo.java.grpc.client.GlobalClientInterceptorRegistry;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
-import com.albedo.java.thrift.rpc.client.proxy.ServiceStarter;
-import com.albedo.java.thrift.rpc.common.vo.ServiceApi;
-import com.qingju.java.rpc.pay.service.thrift.PayThriftService;
-import com.qingju.java.rpc.pay.service.thrift.ThriftServiceConstant;
 
 /**
  * Created by lijie on 2017/4/12.
  */
 @Configuration
+@Order
 public class ServiceConfiguration {
 
     @Bean
-    public ServiceStarter serviceMap(){
+    public GlobalClientInterceptorConfigurerAdapter globalInterceptorConfigurerAdapter() {
+        return new GlobalClientInterceptorConfigurerAdapter() {
 
-        return new ServiceStarter()
-                .startService(PayThriftService.Iface.class,
-                        ServiceApi.create(ThriftServiceConstant.PAY_THRIFT_SERVICE_NAME));
+            @Override
+            public void addClientInterceptors(GlobalClientInterceptorRegistry registry) {
+                registry.addClientInterceptors(new LogGrpcInterceptor());
+            }
+        };
     }
+
 
 
 

@@ -21,7 +21,7 @@ import com.qingju.java.pay.vo.PayQuery;
 public interface OrderRepository extends BaseRepository<Order, String> {
 
 
-    Order findOneByBizCode(String bizCode);
+    Order findOneByPayCode(String bizCode);
 
     @Query
     List<Order> findOrders(@Param("payQuery") PayQuery payQuery);

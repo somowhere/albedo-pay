@@ -1,0 +1,19 @@
+syntax = "proto2";
+
+option java_multiple_files = true;
+package com.qingju.java.rpc.pay.service.grpc;
+
+
+service PayService {
+     rpc create (PayRequest) returns (DataResponse) {}
+     rpc query (PayRequest) returns (DataResponse) {}
+}
+
+message DataResponse{
+    required int32 status = 1;
+    optional string msg = 2;
+    optional string data = 3;
+}
+message PayRequest{
+    optional string data = 1;
+}

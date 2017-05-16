@@ -45,17 +45,32 @@ public class PayService {
     OrderRepository orderRepository;
     @Autowired
     OrderLogRepository orderLogRepository;
+    @Autowired
+    OrderService orderService;
 
-    public void create(PayCreate payCreate){
+
+
+
+    public Order create(PayCreate payCreate){
         Assert.assertNotNull(payCreate,"订单创建参数不能为空");
-        Order order = new Order();
+
+        Order order = orderService.findOneByBizCode(payCreate.getBizCode());
+
+        if(order == null){
+            order = new Order();
+            order.setPayCode(PayUtil.genPayCode());
+        }else{
+            if(Constant.ORDER_PAY_STATUS_SUCEESS == order.getPayStatus()){ //已经支付成功直接返回
+                return order;
+            }
+        }
         BeanUtils.copyProperties(payCreate, order);
-        order.setPayCode(PayUtil.genPayCode());
         order.setPayStatus(Constant.ORDER_PAY_STATUS_WAIT_PAY);
         orderRepository.save(order);
+        return order;
     }
-    public String genParams(String bizCode){
-        Order order = orderRepository.findOneByBizCode(bizCode);
+    public String genParams(String payCode){
+        Order order = orderRepository.findOneByPayCode(payCode);
         Assert.assertNotNull(order,"无法获取订单信息");
         PayCreate payCreate = new PayCreate();
         BeanUtils.copyProperties(order, payCreate);
@@ -64,14 +79,14 @@ public class PayService {
         return params;
     }
 
-    public List<Order> queryOrdes(PayQuery payQuery){
+    public List<Order> queryOrders(PayQuery payQuery){
         Assert.assertNotNull(payQuery,"订单查询参数不能为空");
         List<Order> orderList = orderRepository.findOrders(payQuery);
         return orderList;
     }
 
     public String query(PayQuery payQuery){
-        List<Order> orderList = queryOrdes(payQuery);
+        List<Order> orderList = queryOrders(payQuery);
         return Json.toJsonString(orderList);
     }
 
@@ -80,7 +95,7 @@ public class PayService {
         Assert.assertNotNull(payUpdate,"订单更新参数不能为空");
         Assert.assertIsTrue( payUpdate.getAmount()!=null &&
                 payUpdate.getAmount().intValue()<=0, "订单支付金额不能小于等于0");
-        Order order = orderRepository.findOneByBizCode(payUpdate.getBizCode());
+        Order order = orderRepository.findOneByPayCode(payUpdate.getPayCode());
         Assert.assertNotNull(order,"无法获取订单信息");
         if(payUpdate.getAmount()!= order.getAmount()){
             OrderLog orderLog = new OrderLog();
@@ -94,9 +109,9 @@ public class PayService {
         }
     }
 
-    public Order findOneByBizCode(String bizCobde) {
-        Order order = orderRepository.findOneByBizCode(bizCobde);
-        Assert.assertIsTrue(order!=null, "无法获取 bizCobde:"+bizCobde+" 订单信息");
+    public Order findOneByBizCode(String payCode) {
+        Order order = orderRepository.findOneByPayCode(payCode);
+        Assert.assertIsTrue(order!=null, "无法获取 bizCobde:"+payCode+" 订单信息");
         return order;
     }
 

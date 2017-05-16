@@ -22,12 +22,18 @@ pay:
 server:
     port: 8874
 
-albedo:
-    rpc:
-        namespace: ${spring.application.name}
-        hostUrl: localhost:8168
-        zookeeper:
-            connectString: localhost:2181,localhost:2182,localhost:2183
+grpc:
+    server:
+        port: 9999
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+
 
 
 

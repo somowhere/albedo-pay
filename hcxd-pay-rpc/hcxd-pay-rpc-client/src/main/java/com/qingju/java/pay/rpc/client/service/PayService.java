@@ -1,20 +1,22 @@
 package com.qingju.java.pay.rpc.client.service;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.apache.thrift.TException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-
-import com.albedo.java.util.base.Assert;
+import com.albedo.java.grpc.client.GrpcClient;
 import com.alibaba.fastjson.JSON;
+import com.qingju.java.pay.vo.GrpcMessage;
 import com.qingju.java.pay.vo.Order;
 import com.qingju.java.pay.vo.PayCreate;
 import com.qingju.java.pay.vo.PayQuery;
-import com.qingju.java.rpc.pay.service.thrift.PayThriftService;
+import com.qingju.java.rpc.pay.service.GrpcPayConstant;
+import com.qingju.java.rpc.pay.service.grpc.DataResponse;
+import com.qingju.java.rpc.pay.service.grpc.PayRequest;
+import com.qingju.java.rpc.pay.service.grpc.PayServiceGrpc;
+import io.grpc.Channel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+
+import java.util.List;
 
 /**
  * Created by lijie on 2017/4/12.
@@ -23,28 +25,27 @@ import com.qingju.java.rpc.pay.service.thrift.PayThriftService;
 public class PayService {
 
     public final Logger logger = LoggerFactory.getLogger(this.getClass());
-    @Resource
-    PayThriftService.Iface payThriftService;
+    @GrpcClient(GrpcPayConstant.RPC_SERVER_NAME)
+    private Channel serverChannel;
 
+    public GrpcMessage create(PayCreate payCreate) {
+        String payCreateStr = JSON.toJSONString(payCreate);
+        PayServiceGrpc.PayServiceBlockingStub stub = PayServiceGrpc.newBlockingStub(serverChannel);
+        DataResponse dataResponse = stub.create(PayRequest.newBuilder().setData(payCreateStr).build());
 
-    public void create(PayCreate payCreate) {
-        try {
-            payThriftService.create(JSON.toJSONString(payCreate));
-        } catch (TException e) {
-            logger.warn("TException {}", e);
-            Assert.buildException(e.getMessage());
-        }
+        return GrpcMessage.create(dataResponse.getStatus(), dataResponse.getMsg(), dataResponse.getData());
     }
 
     public List<Order> query(PayQuery payQuery) {
-        try {
-            String rs = payThriftService.query(JSON.toJSONString(payQuery));
-            return JSON.parseArray(rs, Order.class);
-        } catch (TException e) {
-            logger.warn("TException {}", e);
-            Assert.buildException(e.getMessage());
+
+        String payCreateStr = JSON.toJSONString(payQuery);
+        PayServiceGrpc.PayServiceBlockingStub stub = PayServiceGrpc.newBlockingStub(serverChannel);
+        DataResponse dataResponse = stub.query(PayRequest.newBuilder().setData(payCreateStr).build());
+        if(GrpcPayConstant.DATA_RESPONSE_STATUS_SUCCESS != dataResponse.getStatus()){
+            throw new RuntimeException(dataResponse.getMsg());
         }
-        return null;
+        return JSON.parseArray(dataResponse.getData(), Order.class);
+
     }
 
 }
