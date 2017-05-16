@@ -13,13 +13,13 @@ package com.qingju.java.common.pay.http;
  *说明：
  */
 public enum HttpResultType {
-    /**
-     * 字符串方式
-     */
-    STRING,
+	/**
+	 * 字符串方式
+	 */
+	STRING,
 
-    /**
-     * 字节数组方式
-     */
-    BYTES
+	/**
+	 * 字节数组方式
+	 */
+	BYTES
 }

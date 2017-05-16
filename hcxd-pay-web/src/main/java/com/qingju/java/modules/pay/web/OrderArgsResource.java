@@ -26,17 +26,18 @@ import com.qingju.java.pay.service.OrderArgsService;
 
 /**
  * 支付参数Controller 支付参数
+ * 
  * @author lj
  * @version 2017-05-02
  */
 @Controller
 @RequestMapping(value = "${albedo.adminPath}/pay/orderArgs")
 public class OrderArgsResource extends DataResource<OrderArgsService, OrderArgs> {
-	
+
 	@ModelAttribute
 	public OrderArgs get(@RequestParam(required = false) String id) throws Exception {
 		String path = request.getRequestURI();
-		if (path!=null && !path.contains("checkBy") && !path.contains("find") && PublicUtil.isNotEmpty(id)) {
+		if (path != null && !path.contains("checkBy") && !path.contains("find") && PublicUtil.isNotEmpty(id)) {
 			return service.findOne(id);
 		} else {
 			return new OrderArgs();
@@ -54,11 +55,12 @@ public class OrderArgsResource extends DataResource<OrderArgsService, OrderArgs>
 	 * 
 	 * @param pm
 	 *            the pagination information
-	 * @return the ResponseEntity with status 200 (OK) and with body all orderArgs
+	 * @return the ResponseEntity with status 200 (OK) and with body all
+	 *         orderArgs
 	 */
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
 	public ResponseEntity getPage(PageModel<OrderArgs> pm) {
-	    service.findPage(pm, SecurityUtil.dataScopeFilter());
+		service.findPage(pm, SecurityUtil.dataScopeFilter());
 		JSON rs = JsonUtil.getInstance().setRecurrenceStr().toJsonObject(pm);
 		return ResultBuilder.buildObject(rs);
 	}
@@ -66,8 +68,9 @@ public class OrderArgsResource extends DataResource<OrderArgsService, OrderArgs>
 	@RequestMapping(value = "/edit", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public String form(OrderArgs orderArgs) {
-		if(orderArgs == null){
-			throw new RuntimeMsgException(PublicUtil.toAppendStr("查询支付参数失败，原因：无法查找到编号为[", request.getParameter("id"), "]的支付参数"));
+		if (orderArgs == null) {
+			throw new RuntimeMsgException(
+					PublicUtil.toAppendStr("查询支付参数失败，原因：无法查找到编号为[", request.getParameter("id"), "]的支付参数"));
 		}
 		return "modules/pay/orderArgsForm";
 	}
@@ -75,7 +78,8 @@ public class OrderArgsResource extends DataResource<OrderArgsService, OrderArgs>
 	/**
 	 * POST / : Save a orderArgs.
 	 *
-	 * @param orderArgs the HTTP orderArgs
+	 * @param orderArgs
+	 *            the HTTP orderArgs
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
@@ -89,7 +93,8 @@ public class OrderArgsResource extends DataResource<OrderArgsService, OrderArgs>
 	/**
 	 * DELETE //:id : delete the "id" OrderArgs.
 	 *
-	 * @param ids the id of the orderArgs to delete
+	 * @param ids
+	 *            the id of the orderArgs to delete
 	 * @return the ResponseEntity with status 200 (OK)
 	 */
 	@RequestMapping(value = "/delete/{ids:" + Globals.LOGIN_REGEX
@@ -100,10 +105,12 @@ public class OrderArgsResource extends DataResource<OrderArgsService, OrderArgs>
 		service.delete(Lists.newArrayList(ids.split(StringUtil.SPLIT_DEFAULT)));
 		return ResultBuilder.buildOk("删除支付参数成功");
 	}
+
 	/**
 	 * lock //:id : lockOrUnLock the "id" OrderArgs.
 	 *
-	 * @param ids the id of the orderArgs to lock
+	 * @param ids
+	 *            the id of the orderArgs to lock
 	 * @return the ResponseEntity with status 200 (OK)
 	 */
 	@RequestMapping(value = "/lock/{ids:" + Globals.LOGIN_REGEX

@@ -20,28 +20,29 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RedisMessageListener implements MessageListener {
 
-    RedisTemplate redisTemplate;
+	RedisTemplate redisTemplate;
 
-    public RedisMessageListener(RedisTemplate redisTemplate) {
-        this.redisTemplate = redisTemplate;
-    }
-    @Override
-    public void onMessage(Message message, byte[] bytes) {
-        String channel = new String(message.getChannel());
-        Object obj = redisTemplate.getValueSerializer().deserialize(message.getBody());
-        JSONObject json;
-        log.info("channel {} msgObj {}", channel, obj);
-        switch (channel){
-            case Constant.REDIS_RECEVER_UPDATE_PAY_ARGS_PARAMS://更新支付参数
-                JedisUtil.clearAllCacheSys();
-                log.info("update ORDER_TYPE_BIZ_BASE - ORDER_PAY_TYPE_ALIPAY params {}",
-                        PayUtil.findParams(Constant.ORDER_TYPE_BIZ_BASE, ConstantPay.TRADE_TYPE_ALIPAY));
-                log.info("update ORDER_TYPE_BIZ_BASE - ORDER_PAY_TYPE_WECHAT params {}",
-                        PayUtil.findParams(Constant.ORDER_TYPE_BIZ_BASE, ConstantPay.TRADE_TYPE_WEIXIN));
-                break;
-            default:
-                log.warn("未知 channel");
-        }
+	public RedisMessageListener(RedisTemplate redisTemplate) {
+		this.redisTemplate = redisTemplate;
+	}
 
-    }
+	@Override
+	public void onMessage(Message message, byte[] bytes) {
+		String channel = new String(message.getChannel());
+		Object obj = redisTemplate.getValueSerializer().deserialize(message.getBody());
+		JSONObject json;
+		log.info("channel {} msgObj {}", channel, obj);
+		switch (channel) {
+		case Constant.REDIS_RECEVER_UPDATE_PAY_ARGS_PARAMS:// 更新支付参数
+			JedisUtil.clearAllCacheSys();
+			log.info("update ORDER_TYPE_BIZ_BASE - ORDER_PAY_TYPE_ALIPAY params {}",
+					PayUtil.findParams(Constant.ORDER_TYPE_BIZ_BASE, ConstantPay.TRADE_TYPE_ALIPAY));
+			log.info("update ORDER_TYPE_BIZ_BASE - ORDER_PAY_TYPE_WECHAT params {}",
+					PayUtil.findParams(Constant.ORDER_TYPE_BIZ_BASE, ConstantPay.TRADE_TYPE_WEIXIN));
+			break;
+		default:
+			log.warn("未知 channel");
+		}
+
+	}
 }

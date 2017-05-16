@@ -22,30 +22,26 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 
 @GrpcService(PayServiceGrpc.class)
-public class PayServiceImpl extends PayServiceGrpc.PayServiceImplBase{
+public class PayServiceImpl extends PayServiceGrpc.PayServiceImplBase {
 
-    @Autowired
-    private PayService payService;
+	@Autowired
+	private PayService payService;
 
-    @Override
-    public void create(PayRequest request, StreamObserver<DataResponse> responseObserver) {
-        PayCreate payCreate = JSON.parseObject(request.getData(), PayCreate.class);
-        Order order = payService.create(payCreate);
+	@Override
+	public void create(PayRequest request, StreamObserver<DataResponse> responseObserver) {
+		PayCreate payCreate = JSON.parseObject(request.getData(), PayCreate.class);
+		Order order = payService.create(payCreate);
 
-        GrpcUtil.response(
-                GrpcMessage.createData(GrpcPayConstant.DATA_RESPONSE_STATUS_SUCCESS, order.getPayCode()),
-                responseObserver
-        );
+		GrpcUtil.response(GrpcMessage.createData(GrpcPayConstant.DATA_RESPONSE_STATUS_SUCCESS, order.getPayCode()),
+				responseObserver);
 
-    }
+	}
 
-    @Override
-    public void query(PayRequest request, StreamObserver<DataResponse> responseObserver) {
-        PayQuery payQuery = JSON.parseObject(request.getData(), PayQuery.class);
-        String orderJson = payService.query(payQuery);
-        GrpcUtil.response(
-                GrpcMessage.createData(GrpcPayConstant.DATA_RESPONSE_STATUS_SUCCESS, orderJson),
-                responseObserver
-        );
-    }
+	@Override
+	public void query(PayRequest request, StreamObserver<DataResponse> responseObserver) {
+		PayQuery payQuery = JSON.parseObject(request.getData(), PayQuery.class);
+		String orderJson = payService.query(payQuery);
+		GrpcUtil.response(GrpcMessage.createData(GrpcPayConstant.DATA_RESPONSE_STATUS_SUCCESS, orderJson),
+				responseObserver);
+	}
 }

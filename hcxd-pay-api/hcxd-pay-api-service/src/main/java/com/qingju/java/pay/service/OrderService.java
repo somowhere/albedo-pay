@@ -21,21 +21,20 @@ import java.util.List;
 
 /**
  * 支付订单管理Service 支付订单
+ * 
  * @author lj
  * @version 2017-05-02
  */
 @Service
 @Transactional
-public class OrderService extends DataService<OrderRepository, Order, String>{
+public class OrderService extends DataService<OrderRepository, Order, String> {
 
-
-    public Order findOneByBizCode(String bizCode) {
-        SpecificationDetail<Order> specificationDetail = DynamicSpecifications.bySearchQueryCondition(
-                QueryCondition.eq(Order.F_BIZCODE, bizCode),
-                QueryCondition.eq(Order.F_STATUS, OrderArgs.FLAG_NORMAL));
-        List<Order> orderList = findAll(specificationDetail);
-        Order item = orderList==null ? null : orderList.get(0);
-        return item;
-    }
+	public Order findOneByBizCode(String bizCode) {
+		SpecificationDetail<Order> specificationDetail = DynamicSpecifications.bySearchQueryCondition(
+				QueryCondition.eq(Order.F_BIZCODE, bizCode), QueryCondition.eq(Order.F_STATUS, OrderArgs.FLAG_NORMAL));
+		List<Order> orderList = findAll(specificationDetail);
+		Order item = (orderList == null || orderList.size() == 0) ? null : orderList.get(0);
+		return item;
+	}
 
 }

@@ -11,16 +11,17 @@ import com.qingju.java.pay.vo.PayCreate;
  */
 public class PayInstanceAlipay implements PayInstance {
 
-    public static final PayInstanceAlipay I = new PayInstanceAlipay();
+	public static final PayInstanceAlipay I = new PayInstanceAlipay();
 
-    @Override
-    public String genParams(PayCreate payCreate, String domain) {
-        PayAlipayParam payAlipayParam = PayUtil.findParamsByClass(payCreate.getBizType(), payCreate.getPayType(), PayAlipayParam.class);
-        Alipay alipay = new Alipay(payAlipayParam, domain);
-        alipay.setOut_trade_no(payCreate.getBizCode());
-        alipay.setSubject(payCreate.getSubject());
-        alipay.setTotal_fee(payCreate.getAmount());
-        alipay.setBody(payCreate.getSubject());
-        return alipay.buildRequestPara();
-    }
+	@Override
+	public String genParams(PayCreate payCreate, String domain) {
+		PayAlipayParam payAlipayParam = PayUtil.findParamsByClass(payCreate.getBizType(), payCreate.getPayType(),
+				PayAlipayParam.class);
+		Alipay alipay = new Alipay(payAlipayParam, domain);
+		alipay.setOut_trade_no(payCreate.getBizCode());
+		alipay.setSubject(payCreate.getSubject());
+		alipay.setTotal_fee(payCreate.getAmount());
+		alipay.setBody(payCreate.getSubject());
+		return alipay.buildRequestPara();
+	}
 }

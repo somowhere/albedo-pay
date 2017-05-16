@@ -47,45 +47,38 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ClientCustomSSL {
 
-    private ClientCustomSSL clientCustomSSL;
+	private ClientCustomSSL clientCustomSSL;
 
-    private CloseableHttpClient closeableHttpClient;
+	private CloseableHttpClient closeableHttpClient;
 
-    public static ClientCustomSSL getInstance(){
-        return new ClientCustomSSL();
-    }
+	public static ClientCustomSSL getInstance() {
+		return new ClientCustomSSL();
+	}
 
-    public CloseableHttpClient getWCCloseableHttpClient(String certFile, String certPass){
-        InputStream instream = null;
-        CloseableHttpClient closeableHttpClient = null;
-        try {
-            KeyStore keyStore  = KeyStore.getInstance("PKCS12");
-            PathMatchingResourcePatternResolver resourceLoader = new PathMatchingResourcePatternResolver();
-            instream = resourceLoader.getResources(certFile)[0].getInputStream();
-            keyStore.load(instream, certPass.toCharArray());
+	public CloseableHttpClient getWCCloseableHttpClient(String certFile, String certPass) {
+		InputStream instream = null;
+		CloseableHttpClient closeableHttpClient = null;
+		try {
+			KeyStore keyStore = KeyStore.getInstance("PKCS12");
+			PathMatchingResourcePatternResolver resourceLoader = new PathMatchingResourcePatternResolver();
+			instream = resourceLoader.getResources(certFile)[0].getInputStream();
+			keyStore.load(instream, certPass.toCharArray());
 
-            // Trust own CA and all self-signed certs
-            SSLContext sslcontext = SSLContexts.custom()
-                    .loadKeyMaterial(keyStore, certPass.toCharArray())
-                    .build();
-            // Allow TLSv1 protocol only
-            SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
-                    sslcontext,
-                    new String[] { "TLSv1" },
-                    null,
-                    SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
-            closeableHttpClient = HttpClients.custom()
-                    .setSSLSocketFactory(sslsf)
-                    .build();
-        } catch (Exception e) {
-            log.error(e.getMessage());
-        } finally {
-            try {
-                instream.close();
-            } catch (IOException e) {
-                log.error(e.getMessage());
-            }
-        }
-        return closeableHttpClient;
-    }
+			// Trust own CA and all self-signed certs
+			SSLContext sslcontext = SSLContexts.custom().loadKeyMaterial(keyStore, certPass.toCharArray()).build();
+			// Allow TLSv1 protocol only
+			SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext, new String[] { "TLSv1" },
+					null, SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
+			closeableHttpClient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		} finally {
+			try {
+				instream.close();
+			} catch (IOException e) {
+				log.error(e.getMessage());
+			}
+		}
+		return closeableHttpClient;
+	}
 }

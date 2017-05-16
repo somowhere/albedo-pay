@@ -22,13 +22,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class BaseTrade {
 
-
-	public String get(HttpRequest request){
+	public String get(HttpRequest request) {
 		HttpProtocolHandler httpProtocolHandler = HttpProtocolHandler.getInstance();
 		HttpResponse response;
 		String strResult = null;
 		try {
-			log.info("Post url: [" + request.getUrl() + "] \n" + " params: [" +  request.getQueryString() + "]");
+			log.info("Post url: [" + request.getUrl() + "] \n" + " params: [" + request.getQueryString() + "]");
 			response = httpProtocolHandler.execute(request, "", "");
 			strResult = getResult(response);
 		} catch (Exception e) {
@@ -37,14 +36,14 @@ public class BaseTrade {
 		return strResult;
 	}
 
-
-	public String post(HttpRequest request, String  strParaFileName, String  strFilePath){
+	public String post(HttpRequest request, String strParaFileName, String strFilePath) {
 		HttpProtocolHandler httpProtocolHandler = HttpProtocolHandler.getInstance();
 		HttpResponse response;
 		String strResult = null;
 		try {
-			log.info("Post url: [" + request.getUrl() + "] \n" + " params: [" +getParametersStr( request.getParameters() )+ "]");
-			response = httpProtocolHandler.execute(request,strParaFileName,strFilePath);
+			log.info("Post url: [" + request.getUrl() + "] \n" + " params: ["
+					+ getParametersStr(request.getParameters()) + "]");
+			response = httpProtocolHandler.execute(request, strParaFileName, strFilePath);
 			strResult = getResultFromHeader(response);
 		} catch (Exception e) {
 			log.error("BaseTrade->post exception: " + e.getMessage());
@@ -52,7 +51,7 @@ public class BaseTrade {
 		return strResult;
 	}
 
-	public String sslXmlPost(String url, String certFile, String certPass, String content){
+	public String sslXmlPost(String url, String certFile, String certPass, String content) {
 		HttpProtocolHandler httpProtocolHandler = HttpProtocolHandler.getInstance();
 		HttpResponse response = null;
 		try {
@@ -64,19 +63,19 @@ public class BaseTrade {
 		return getResult(response);
 	}
 
-    public String xmlPost(String url, String content){
-        HttpProtocolHandler httpProtocolHandler = HttpProtocolHandler.getInstance();
-        HttpResponse response = null;
-        try {
-            log.info("Post url: [" + url + "] \n" + " params: [" + content + "]");
-            response = httpProtocolHandler.xmlPost(url, content);
-        } catch (Exception e) {
-            log.error("BaseTrade->post exception: " + e.getMessage());
-        }
-        return getResult(response);
-    }
+	public String xmlPost(String url, String content) {
+		HttpProtocolHandler httpProtocolHandler = HttpProtocolHandler.getInstance();
+		HttpResponse response = null;
+		try {
+			log.info("Post url: [" + url + "] \n" + " params: [" + content + "]");
+			response = httpProtocolHandler.xmlPost(url, content);
+		} catch (Exception e) {
+			log.error("BaseTrade->post exception: " + e.getMessage());
+		}
+		return getResult(response);
+	}
 
-	public String zlinePost(String url, String data){
+	public String zlinePost(String url, String data) {
 		String response = null;
 		HttpProtocolHandler httpProtocolHandler = HttpProtocolHandler.getInstance();
 		try {
@@ -88,7 +87,7 @@ public class BaseTrade {
 		return response;
 	}
 
-	private String getResultFromHeader(HttpResponse response){
+	private String getResultFromHeader(HttpResponse response) {
 		if (response == null) {
 			return "";
 		}
@@ -110,7 +109,7 @@ public class BaseTrade {
 		return strResult;
 	}
 
-	private String getResult(HttpResponse response){
+	private String getResult(HttpResponse response) {
 		if (response == null) {
 			return "";
 		}
@@ -144,7 +143,7 @@ public class BaseTrade {
 		return prestr;
 	}
 
-	public LinkedHashMap sort(Map<String, String> params){
+	public LinkedHashMap sort(Map<String, String> params) {
 		LinkedHashMap linkedHashMap = new LinkedHashMap();
 		List<String> keys = new ArrayList<String>(params.keySet());
 		Collections.sort(keys);
@@ -186,12 +185,10 @@ public class BaseTrade {
 	}
 
 	public String randomStr() {
-		char[] chars = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A',
-				'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-				'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y',
-				'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
-				'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w',
-				'x', 'y', 'z' };
+		char[] chars = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
+				'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd',
+				'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y',
+				'z' };
 		String res = "";
 		for (int i = 0; i < 30; i++) {
 			int id = (int) Math.ceil(Math.random() * 60);

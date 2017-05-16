@@ -11,14 +11,11 @@ import io.grpc.stub.StreamObserver;
  */
 public class GrpcUtil {
 
-    public static void response(GrpcMessage grpcMessage, StreamObserver<DataResponse> responseObserver){
-        DataResponse reply = DataResponse.newBuilder()
-                .setStatus(grpcMessage.getStatus())
-                .setMsg(grpcMessage.getMsg())
-                .setData(grpcMessage.getData()).build();
-        responseObserver.onNext(reply);
-        responseObserver.onCompleted();
-    }
-
+	public static void response(GrpcMessage grpcMessage, StreamObserver<DataResponse> responseObserver) {
+		DataResponse reply = DataResponse.newBuilder().setStatus(grpcMessage.getStatus()).setMsg(grpcMessage.getMsg())
+				.setData(grpcMessage.getData()).build();
+		responseObserver.onNext(reply);
+		responseObserver.onCompleted();
+	}
 
 }

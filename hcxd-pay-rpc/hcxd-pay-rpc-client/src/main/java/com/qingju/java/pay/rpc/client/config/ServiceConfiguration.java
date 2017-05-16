@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 
-
 /**
  * Created by lijie on 2017/4/12.
  */
@@ -14,18 +13,15 @@ import org.springframework.core.annotation.Order;
 @Order
 public class ServiceConfiguration {
 
-    @Bean
-    public GlobalClientInterceptorConfigurerAdapter globalInterceptorConfigurerAdapter() {
-        return new GlobalClientInterceptorConfigurerAdapter() {
+	@Bean
+	public GlobalClientInterceptorConfigurerAdapter globalInterceptorConfigurerAdapter() {
+		return new GlobalClientInterceptorConfigurerAdapter() {
 
-            @Override
-            public void addClientInterceptors(GlobalClientInterceptorRegistry registry) {
-                registry.addClientInterceptors(new LogGrpcInterceptor());
-            }
-        };
-    }
-
-
-
+			@Override
+			public void addClientInterceptors(GlobalClientInterceptorRegistry registry) {
+				registry.addClientInterceptors(new LogGrpcInterceptor());
+			}
+		};
+	}
 
 }

@@ -17,13 +17,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class OrderController {
 
-    @Autowired
-    PayService payService;
+	@Autowired
+	PayService payService;
 
-    @RequestMapping("/update")
-    public String update(PayUpdate payUpdate){
-        payService.update(payUpdate);
-        return "success";
-    }
+	@RequestMapping("/update")
+	public String update(PayUpdate payUpdate) {
+		payService.update(payUpdate);
+		return "success";
+	}
 
 }

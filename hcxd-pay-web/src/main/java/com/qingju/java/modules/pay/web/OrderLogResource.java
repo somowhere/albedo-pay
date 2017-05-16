@@ -26,17 +26,18 @@ import com.qingju.java.pay.service.OrderLogService;
 
 /**
  * 订单日志Controller 订单日志
+ * 
  * @author lj
  * @version 2017-05-16
  */
 @Controller
 @RequestMapping(value = "${albedo.adminPath}/pay/orderLog")
 public class OrderLogResource extends DataResource<OrderLogService, OrderLog> {
-	
+
 	@ModelAttribute
 	public OrderLog get(@RequestParam(required = false) String id) throws Exception {
 		String path = request.getRequestURI();
-		if (path!=null && !path.contains("checkBy") && !path.contains("find") && PublicUtil.isNotEmpty(id)) {
+		if (path != null && !path.contains("checkBy") && !path.contains("find") && PublicUtil.isNotEmpty(id)) {
 			return service.findOne(id);
 		} else {
 			return new OrderLog();
@@ -54,11 +55,12 @@ public class OrderLogResource extends DataResource<OrderLogService, OrderLog> {
 	 * 
 	 * @param pm
 	 *            the pagination information
-	 * @return the ResponseEntity with status 200 (OK) and with body all orderLog
+	 * @return the ResponseEntity with status 200 (OK) and with body all
+	 *         orderLog
 	 */
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
 	public ResponseEntity getPage(PageModel<OrderLog> pm) {
-	    service.findPage(pm, SecurityUtil.dataScopeFilter());
+		service.findPage(pm, SecurityUtil.dataScopeFilter());
 		JSON rs = JsonUtil.getInstance().setRecurrenceStr().toJsonObject(pm);
 		return ResultBuilder.buildObject(rs);
 	}
@@ -66,8 +68,9 @@ public class OrderLogResource extends DataResource<OrderLogService, OrderLog> {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public String form(OrderLog orderLog) {
-		if(orderLog == null){
-			throw new RuntimeMsgException(PublicUtil.toAppendStr("查询订单日志失败，原因：无法查找到编号为[", request.getParameter("id"), "]的订单日志"));
+		if (orderLog == null) {
+			throw new RuntimeMsgException(
+					PublicUtil.toAppendStr("查询订单日志失败，原因：无法查找到编号为[", request.getParameter("id"), "]的订单日志"));
 		}
 		return "modules/pay/orderLogForm";
 	}
@@ -75,7 +78,8 @@ public class OrderLogResource extends DataResource<OrderLogService, OrderLog> {
 	/**
 	 * POST / : Save a orderLog.
 	 *
-	 * @param orderLog the HTTP orderLog
+	 * @param orderLog
+	 *            the HTTP orderLog
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
@@ -89,7 +93,8 @@ public class OrderLogResource extends DataResource<OrderLogService, OrderLog> {
 	/**
 	 * DELETE //:id : delete the "id" OrderLog.
 	 *
-	 * @param ids the id of the orderLog to delete
+	 * @param ids
+	 *            the id of the orderLog to delete
 	 * @return the ResponseEntity with status 200 (OK)
 	 */
 	@RequestMapping(value = "/delete/{ids:" + Globals.LOGIN_REGEX
@@ -100,10 +105,12 @@ public class OrderLogResource extends DataResource<OrderLogService, OrderLog> {
 		service.delete(Lists.newArrayList(ids.split(StringUtil.SPLIT_DEFAULT)));
 		return ResultBuilder.buildOk("删除订单日志成功");
 	}
+
 	/**
 	 * lock //:id : lockOrUnLock the "id" OrderLog.
 	 *
-	 * @param ids the id of the orderLog to lock
+	 * @param ids
+	 *            the id of the orderLog to lock
 	 * @return the ResponseEntity with status 200 (OK)
 	 */
 	@RequestMapping(value = "/lock/{ids:" + Globals.LOGIN_REGEX

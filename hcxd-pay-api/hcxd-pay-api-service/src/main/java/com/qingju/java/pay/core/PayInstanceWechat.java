@@ -15,24 +15,25 @@ import com.qingju.java.pay.vo.PayCreate;
  */
 public class PayInstanceWechat implements PayInstance {
 
-    public static final PayInstanceWechat I = new PayInstanceWechat();
+	public static final PayInstanceWechat I = new PayInstanceWechat();
 
+	@Override
+	public String genParams(PayCreate payCreate, String domain) {
+		PayWechatParam payWechatParam = PayUtil.findParamsByClass(payCreate.getBizType(), payCreate.getPayType(),
+				PayWechatParam.class);
+		Wechat wechat = new Wechat(payWechatParam, domain);
+		wechat.setBody(payCreate.getSubject());
+		wechat.setOut_trade_no(payCreate.getBizCode());
+		wechat.setSpbill_create_ip(payCreate.getClientIp());
+		wechat.setTotal_fee(
+				payCreate.getAmount().setScale(2, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100)).intValue());
+		wechat.setAttach(payCreate.getAttach());
+		if (Constant.PAY_INVOKE_JS == payCreate.getInvokeType()) {
+			Assert.assertNotBlank(payCreate.getOpenId(), "微信支付授权信息缺失");
+			wechat.setOpenid(payCreate.getOpenId());
+		}
+		String paramStr = wechat.buildRequestPara(payCreate.getInvokeType());
 
-    @Override
-    public String genParams(PayCreate payCreate, String domain) {
-        PayWechatParam payWechatParam = PayUtil.findParamsByClass(payCreate.getBizType(), payCreate.getPayType(), PayWechatParam.class);
-        Wechat wechat = new Wechat(payWechatParam, domain);
-        wechat.setBody(payCreate.getSubject());
-        wechat.setOut_trade_no(payCreate.getBizCode());
-        wechat.setSpbill_create_ip(payCreate.getClientIp());
-        wechat.setTotal_fee(payCreate.getAmount().setScale(2, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100)).intValue());
-        wechat.setAttach(payCreate.getAttach());
-        if (Constant.PAY_INVOKE_JS == payCreate.getInvokeType()) {
-            Assert.assertNotBlank(payCreate.getOpenId(), "微信支付授权信息缺失");
-            wechat.setOpenid(payCreate.getOpenId());
-        }
-        String paramStr = wechat.buildRequestPara(payCreate.getInvokeType());
-
-        return paramStr;
-    }
+		return paramStr;
+	}
 }

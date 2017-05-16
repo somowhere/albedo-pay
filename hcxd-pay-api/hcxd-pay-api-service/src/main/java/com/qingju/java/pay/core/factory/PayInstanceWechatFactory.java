@@ -11,8 +11,8 @@ import com.qingju.java.pay.core.PayInstanceWechat;
  */
 @Spi
 public class PayInstanceWechatFactory implements PayInstanceFactory {
-    @Override
-    public PayInstance get() {
-        return PayInstanceWechat.I;
-    }
+	@Override
+	public PayInstance get() {
+		return PayInstanceWechat.I;
+	}
 }

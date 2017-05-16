@@ -11,8 +11,8 @@ import com.qingju.java.pay.core.PayInstanceAlipay;
  */
 @Spi
 public class PayInstanceAlipayFactory implements PayInstanceFactory {
-    @Override
-    public PayInstance get() {
-        return PayInstanceAlipay.I;
-    }
+	@Override
+	public PayInstance get() {
+		return PayInstanceAlipay.I;
+	}
 }

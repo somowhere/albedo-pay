@@ -18,21 +18,22 @@ import com.qingju.java.pay.repository.OrderArgsRepository;
 
 /**
  * 支付参数Service 支付参数
+ * 
  * @author lj
  * @version 2017-05-02
  */
 @Service
 @Transactional
-public class OrderArgsService extends DataService<OrderArgsRepository, OrderArgs, String>{
+public class OrderArgsService extends DataService<OrderArgsRepository, OrderArgs, String> {
 
-    public OrderArgs findAllByBizTypeAndPayType(Integer bizType, Integer payType) {
-        SpecificationDetail<OrderArgs> specificationDetail = DynamicSpecifications.bySearchQueryCondition(
-                QueryCondition.eq(OrderArgs.F_BIZTYPE, bizType),
-                QueryCondition.eq(OrderArgs.F_PAYTYPE, payType),
-                QueryCondition.eq(OrderArgs.F_STATUS, OrderArgs.FLAG_NORMAL));
-        specificationDetail.setOrders(Lists.newArrayList(com.albedo.java.util.domain.Order.desc(OrderArgs.F_LASTMODIFIEDDATE)));
-        List<OrderArgs> orderArgsList = findAll(specificationDetail);
-        OrderArgs item = orderArgsList==null ? null : orderArgsList.get(0);
-        return item;
-    }
+	public OrderArgs findAllByBizTypeAndPayType(Integer bizType, Integer payType) {
+		SpecificationDetail<OrderArgs> specificationDetail = DynamicSpecifications.bySearchQueryCondition(
+				QueryCondition.eq(OrderArgs.F_BIZTYPE, bizType), QueryCondition.eq(OrderArgs.F_PAYTYPE, payType),
+				QueryCondition.eq(OrderArgs.F_STATUS, OrderArgs.FLAG_NORMAL));
+		specificationDetail
+				.setOrders(Lists.newArrayList(com.albedo.java.util.domain.Order.desc(OrderArgs.F_LASTMODIFIEDDATE)));
+		List<OrderArgs> orderArgsList = findAll(specificationDetail);
+		OrderArgs item = orderArgsList == null ? null : orderArgsList.get(0);
+		return item;
+	}
 }

@@ -20,20 +20,19 @@ import com.qingju.java.pay.listener.RedisMessageListener;
 @Configuration
 public class RedisConfiguration {
 
-    @Bean
-    public RedisMessageListener redisMessageListener(RedisTemplate redisTemplate){
-        return new RedisMessageListener(redisTemplate);
-    }
+	@Bean
+	public RedisMessageListener redisMessageListener(RedisTemplate redisTemplate) {
+		return new RedisMessageListener(redisTemplate);
+	}
 
-    @Bean
-    public RedisMessageListenerContainer container(RedisConnectionFactory connectionFactory,
-                                                   MessageListener messageListener) {
-        RedisMessageListenerContainer container = new RedisMessageListenerContainer();
-        container.setConnectionFactory(connectionFactory);
-        container.addMessageListener(messageListener, Lists.newArrayList(
-                new PatternTopic(Constant.REDIS_RECEVER_UPDATE_PAY_ARGS_PARAMS)
-        ));
-        return container;
-    }
+	@Bean
+	public RedisMessageListenerContainer container(RedisConnectionFactory connectionFactory,
+			MessageListener messageListener) {
+		RedisMessageListenerContainer container = new RedisMessageListenerContainer();
+		container.setConnectionFactory(connectionFactory);
+		container.addMessageListener(messageListener,
+				Lists.newArrayList(new PatternTopic(Constant.REDIS_RECEVER_UPDATE_PAY_ARGS_PARAMS)));
+		return container;
+	}
 
 }

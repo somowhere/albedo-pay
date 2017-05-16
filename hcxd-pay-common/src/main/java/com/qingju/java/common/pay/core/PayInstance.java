@@ -7,6 +7,6 @@ import com.qingju.java.pay.vo.PayCreate;
  */
 public interface PayInstance {
 
-    String genParams(PayCreate payCreate, String domain);
+	String genParams(PayCreate payCreate, String domain);
 
 }

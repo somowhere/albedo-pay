@@ -20,33 +20,29 @@ import com.qingju.java.common.pay.core.vo.Alipay;
 import com.qingju.java.pay.config.PayProperties;
 import com.qingju.java.pay.util.PayUtil;
 
-
 /**
  * Created by lijie on 2017/4/28.
  */
-@ContextConfiguration(classes = {RedisAutoConfiguration.class, TestConfig.class},
-        initializers = { ConfigFileApplicationContextInitializer.class })
+@ContextConfiguration(classes = { RedisAutoConfiguration.class, TestConfig.class }, initializers = {
+		ConfigFileApplicationContextInitializer.class })
 @RunWith(SpringJUnit4ClassRunner.class)
-public class AlipayTest{
+public class AlipayTest {
 
-    @Autowired
-    PayProperties payProperties;
+	@Autowired
+	PayProperties payProperties;
 
-    @org.junit.Test
-    public void notifyVerify() throws Exception {
-        PayAlipayParam payAlipayParam = PayUtil.
-                findParamsByClass(Constant.ORDER_TYPE_BIZ_BASE, ConstantPay.TRADE_TYPE_ALIPAY,
-                        PayAlipayParam.class);
-        Alipay alipay = new Alipay(payAlipayParam, payProperties.getDomain());
-        alipay.setOut_trade_no("aaaaaaa");
-        alipay.setSubject("主题");
-        alipay.setTotal_fee(new BigDecimal(0.01));
-        alipay.setBody("描述");
-        String paramStr = alipay.buildRequestPara();
-        System.out.println(paramStr);
-        assertThat(paramStr, is(notNullValue()));
-    }
-
-
+	@org.junit.Test
+	public void notifyVerify() throws Exception {
+		PayAlipayParam payAlipayParam = PayUtil.findParamsByClass(Constant.ORDER_TYPE_BIZ_BASE,
+				ConstantPay.TRADE_TYPE_ALIPAY, PayAlipayParam.class);
+		Alipay alipay = new Alipay(payAlipayParam, payProperties.getDomain());
+		alipay.setOut_trade_no("aaaaaaa");
+		alipay.setSubject("主题");
+		alipay.setTotal_fee(new BigDecimal(0.01));
+		alipay.setBody("描述");
+		String paramStr = alipay.buildRequestPara();
+		System.out.println(paramStr);
+		assertThat(paramStr, is(notNullValue()));
+	}
 
 }

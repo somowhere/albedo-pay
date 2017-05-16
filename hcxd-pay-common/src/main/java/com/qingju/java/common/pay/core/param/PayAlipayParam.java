@@ -16,28 +16,27 @@ import lombok.Data;
 import lombok.ToString;
 
 /**
- * 系统的全局常量on
- * Created by Liuyihua. on 2016/3/3.
+ * 系统的全局常量on Created by Liuyihua. on 2016/3/3.
  */
-@Data @ToString
+@Data
+@ToString
 public class PayAlipayParam {
 
-    private String signRsa;
-    private String keyPri;
-    private String keyPub;
-    private String partner;
-    private String sellerId;
-    private String sellerEmail;
-    private String notifyUrl;
-    private String payServiceApi;
-    private String paymentTypeBuy;
-    private String gateway;
-    private String veryfyServiceApi;
-    private String payTimeOut;
-    private String rewardServiceApi;
-    private String rewardNotifyUrl;
-    private String accountName;
-    private String queryServiceApi;
+	private String signRsa;
+	private String keyPri;
+	private String keyPub;
+	private String partner;
+	private String sellerId;
+	private String sellerEmail;
+	private String notifyUrl;
+	private String payServiceApi;
+	private String paymentTypeBuy;
+	private String gateway;
+	private String veryfyServiceApi;
+	private String payTimeOut;
+	private String rewardServiceApi;
+	private String rewardNotifyUrl;
+	private String accountName;
+	private String queryServiceApi;
 
-    
 }

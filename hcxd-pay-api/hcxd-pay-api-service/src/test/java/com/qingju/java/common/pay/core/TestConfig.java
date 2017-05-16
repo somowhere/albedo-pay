@@ -42,76 +42,74 @@ import com.qingju.java.pay.config.PayProperties;
  * @author 837158334@qq.com
  */
 @Configuration
-@EnableMybatisRepositories(
-        value = {"com.albedo.java.modules.*.repository", "com.qingju.java.pay.*.repository"},
-        mapperLocations = "classpath*:/mappings/modules/*/*Mapper.xml"
-)
+@EnableMybatisRepositories(value = { "com.albedo.java.modules.*.repository",
+		"com.qingju.java.pay.*.repository" }, mapperLocations = "classpath*:/mappings/modules/*/*Mapper.xml")
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"com.albedo.java.*","com.qingju.java.*"})
+@ComponentScan(basePackages = { "com.albedo.java.*", "com.qingju.java.*" })
 @AutoConfigureAfter(value = RedisAutoConfiguration.class)
-@EnableConfigurationProperties({AlbedoProperties.class, PayProperties.class, RedisProperties.class})
+@EnableConfigurationProperties({ AlbedoProperties.class, PayProperties.class, RedisProperties.class })
 public class TestConfig implements ResourceLoaderAware, ApplicationContextAware {
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        SpringContextHolder.setStaticApplicationContext(applicationContext);
-    }
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		SpringContextHolder.setStaticApplicationContext(applicationContext);
+	}
 
-    private ResourceLoader resourceLoader;
+	private ResourceLoader resourceLoader;
 
-    @Bean
-    public DataSource routingDataSource() throws SQLException {
-        EmbeddedDatabase embeddedDatabase = new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2)
-                .addScript("classpath:/test-init.sql").build();
+	@Bean
+	public DataSource routingDataSource() throws SQLException {
+		EmbeddedDatabase embeddedDatabase = new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2)
+				.addScript("classpath:/test-init.sql").build();
 
-        ReplicationRoutingDataSource proxy = new ReplicationRoutingDataSource(embeddedDatabase, null);
-        proxy.addSlave(embeddedDatabase);
-        proxy.addSlave(embeddedDatabase);
-        proxy.addSlave(embeddedDatabase);
-        return proxy;
-    }
+		ReplicationRoutingDataSource proxy = new ReplicationRoutingDataSource(embeddedDatabase, null);
+		proxy.addSlave(embeddedDatabase);
+		proxy.addSlave(embeddedDatabase);
+		proxy.addSlave(embeddedDatabase);
+		return proxy;
+	}
 
-    @Bean
-    public DataSource dataSource(@Qualifier("routingDataSource") DataSource routingDataSource) {
-        return new LazyConnectionDataSourceProxy(routingDataSource);
-    }
+	@Bean
+	public DataSource dataSource(@Qualifier("routingDataSource") DataSource routingDataSource) {
+		return new LazyConnectionDataSourceProxy(routingDataSource);
+	}
 
-    @Bean
-    public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource) {
-        SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
-        factoryBean.setDataSource(dataSource);
-        factoryBean.setTransactionFactory(new ReadWriteManagedTransactionFactory());
-        return factoryBean;
-    }
+	@Bean
+	public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource) {
+		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+		factoryBean.setDataSource(dataSource);
+		factoryBean.setTransactionFactory(new ReadWriteManagedTransactionFactory());
+		return factoryBean;
+	}
 
-    @Bean
-    public PlatformTransactionManager transactionManager(DataSource dataSource) {
-        return new DataSourceTransactionManager(dataSource);
-    }
+	@Bean
+	public PlatformTransactionManager transactionManager(DataSource dataSource) {
+		return new DataSourceTransactionManager(dataSource);
+	}
 
-    @Bean
-    public AuditorAware<String> auditorAware() {
-        return new AuditorAware<String>() {
-            @Override
-            public String getCurrentAuditor() {
-                return "1";
-            }
-        };
-    }
+	@Bean
+	public AuditorAware<String> auditorAware() {
+		return new AuditorAware<String>() {
+			@Override
+			public String getCurrentAuditor() {
+				return "1";
+			}
+		};
+	}
 
-    @Bean
-    public AuditDateAware<Date> auditDateAware() {
-        return new AuditDateAware<Date>() {
-            @Override
-            public Date getCurrentDate() {
-                return new Date();
-            }
-        };
-    }
+	@Bean
+	public AuditDateAware<Date> auditDateAware() {
+		return new AuditDateAware<Date>() {
+			@Override
+			public Date getCurrentDate() {
+				return new Date();
+			}
+		};
+	}
 
-    @Override
-    public void setResourceLoader(ResourceLoader resourceLoader) {
+	@Override
+	public void setResourceLoader(ResourceLoader resourceLoader) {
 
-        this.resourceLoader = resourceLoader;
-    }
+		this.resourceLoader = resourceLoader;
+	}
 }

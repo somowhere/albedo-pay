@@ -69,5 +69,4 @@ public class WebAutoConfigurer implements EmbeddedServletContainerCustomizer {
 		return extractedPath.substring(0, extractionEndIndex);
 	}
 
-
 }

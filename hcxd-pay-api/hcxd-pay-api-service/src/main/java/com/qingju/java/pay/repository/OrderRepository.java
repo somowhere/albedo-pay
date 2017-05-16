@@ -3,7 +3,6 @@
  */
 package com.qingju.java.pay.repository;
 
-
 import java.util.List;
 
 import org.springframework.data.mybatis.repository.annotation.Query;
@@ -15,14 +14,16 @@ import com.qingju.java.pay.vo.PayQuery;
 
 /**
  * 支付订单管理Repository 支付订单
+ * 
  * @author lj
  * @version 2017-05-02
  */
 public interface OrderRepository extends BaseRepository<Order, String> {
 
+	Order findOneByPayCode(String bizCode);
 
-    Order findOneByPayCode(String bizCode);
+	@Query
+	List<Order> findOrders(@Param("payQuery") PayQuery payQuery);
 
-    @Query
-    List<Order> findOrders(@Param("payQuery") PayQuery payQuery);
+	Order findOneByBizCode(String payCode);
 }

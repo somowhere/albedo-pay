@@ -26,17 +26,18 @@ import com.qingju.java.pay.service.OrderService;
 
 /**
  * 支付订单Controller 支付订单
+ * 
  * @author lijie
  * @version 2017-05-05
  */
 @Controller
 @RequestMapping(value = "${albedo.adminPath}/pay/order")
 public class OrderResource extends DataResource<OrderService, Order> {
-	
+
 	@ModelAttribute
 	public Order get(@RequestParam(required = false) String id) throws Exception {
 		String path = request.getRequestURI();
-		if (path!=null && !path.contains("checkBy") && !path.contains("find") && PublicUtil.isNotEmpty(id)) {
+		if (path != null && !path.contains("checkBy") && !path.contains("find") && PublicUtil.isNotEmpty(id)) {
 			return service.findOne(id);
 		} else {
 			return new Order();
@@ -58,7 +59,7 @@ public class OrderResource extends DataResource<OrderService, Order> {
 	 */
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
 	public ResponseEntity getPage(PageModel<Order> pm) {
-	    service.findPage(pm, SecurityUtil.dataScopeFilter());
+		service.findPage(pm, SecurityUtil.dataScopeFilter());
 		JSON rs = JsonUtil.getInstance().setRecurrenceStr().toJsonObject(pm);
 		return ResultBuilder.buildObject(rs);
 	}
@@ -66,8 +67,9 @@ public class OrderResource extends DataResource<OrderService, Order> {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public String form(Order order) {
-		if(order == null){
-			throw new RuntimeMsgException(PublicUtil.toAppendStr("查询支付订单失败，原因：无法查找到编号为[", request.getParameter("id"), "]的支付订单"));
+		if (order == null) {
+			throw new RuntimeMsgException(
+					PublicUtil.toAppendStr("查询支付订单失败，原因：无法查找到编号为[", request.getParameter("id"), "]的支付订单"));
 		}
 		return "modules/pay/orderForm";
 	}
@@ -75,7 +77,8 @@ public class OrderResource extends DataResource<OrderService, Order> {
 	/**
 	 * POST / : Save a order.
 	 *
-	 * @param order the HTTP order
+	 * @param order
+	 *            the HTTP order
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
@@ -89,7 +92,8 @@ public class OrderResource extends DataResource<OrderService, Order> {
 	/**
 	 * DELETE //:id : delete the "id" Order.
 	 *
-	 * @param ids the id of the order to delete
+	 * @param ids
+	 *            the id of the order to delete
 	 * @return the ResponseEntity with status 200 (OK)
 	 */
 	@RequestMapping(value = "/delete/{ids:" + Globals.LOGIN_REGEX
@@ -100,10 +104,12 @@ public class OrderResource extends DataResource<OrderService, Order> {
 		service.delete(Lists.newArrayList(ids.split(StringUtil.SPLIT_DEFAULT)));
 		return ResultBuilder.buildOk("删除支付订单成功");
 	}
+
 	/**
 	 * lock //:id : lockOrUnLock the "id" Order.
 	 *
-	 * @param ids the id of the order to lock
+	 * @param ids
+	 *            the id of the order to lock
 	 * @return the ResponseEntity with status 200 (OK)
 	 */
 	@RequestMapping(value = "/lock/{ids:" + Globals.LOGIN_REGEX

@@ -37,123 +37,116 @@ import lombok.extern.slf4j.Slf4j;
  *
  * @author 837158334@qq.com
  */
-@ContextConfiguration(classes = {RedisAutoConfiguration.class, TestConfig.class},
-        initializers = { ConfigFileApplicationContextInitializer.class })
+@ContextConfiguration(classes = { RedisAutoConfiguration.class, TestConfig.class }, initializers = {
+		ConfigFileApplicationContextInitializer.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Slf4j
 public class PayServiceTest {
-    @Autowired
-    PayService payService;
-    @Autowired
-    OrderLogRepository orderLogRepository;
-    @Autowired
-    OrderRepository orderRepository;
+	@Autowired
+	PayService payService;
+	@Autowired
+	OrderLogRepository orderLogRepository;
+	@Autowired
+	OrderRepository orderRepository;
 
+	public String orderCodeAlipay = PublicUtil.getRandomString(4) + PublicUtil.getCurrentTime("yyyyMMddHHmmss");
+	public String orderCodeWechat = PublicUtil.getRandomString(4) + PublicUtil.getCurrentTime("yyyyMMddHHmmss");
+	public String orderPayCodeAlipay = PublicUtil.getRandomString(4) + PublicUtil.getCurrentTime("yyyyMMddHHmmss");
+	public String orderPayCodeWechat = PublicUtil.getRandomString(4) + PublicUtil.getCurrentTime("yyyyMMddHHmmss");
 
-    public String orderCodeAlipay = PublicUtil.getRandomString(4) + PublicUtil.getCurrentTime("yyyyMMddHHmmss");
-    public String orderCodeWechat = PublicUtil.getRandomString(4) + PublicUtil.getCurrentTime("yyyyMMddHHmmss");
-    public String orderPayCodeAlipay = PublicUtil.getRandomString(4) + PublicUtil.getCurrentTime("yyyyMMddHHmmss");
-    public String orderPayCodeWechat = PublicUtil.getRandomString(4) + PublicUtil.getCurrentTime("yyyyMMddHHmmss");
-    @Before
-    public void beforeInit(){
-        PayCreate payCreate = new PayCreate();
-        payCreate.setAmount(new BigDecimal(0.01));
-        payCreate.setBizCode(orderCodeAlipay);
-        payCreate.setClientIp("127.0.0.1");
-        payCreate.setBizType(Constant.ORDER_TYPE_BIZ_BASE);
-        payCreate.setSubject("我是支付宝测试订单啊");
-        payCreate.setPayType(ConstantPay.TRADE_TYPE_ALIPAY);
-        Order order = payService.create(payCreate);
-        orderPayCodeAlipay = order.getPayCode();
-        log.info("payCreate {}", payCreate);
-        assertThat(payCreate, is(notNullValue()));
-        payCreate = new PayCreate();
-        payCreate.setAmount(new BigDecimal(0.01));
-        payCreate.setBizCode(orderCodeWechat);
-        payCreate.setClientIp("127.0.0.1");
-        payCreate.setBizType(Constant.ORDER_TYPE_BIZ_BASE);
-        payCreate.setSubject("我是微信App测试订单啊");
-        payCreate.setAttach(orderCodeWechat);
-        payCreate.setPayType(ConstantPay.TRADE_TYPE_WEIXIN);
-        order = payService.create(payCreate);
-        orderPayCodeWechat = order.getPayCode();
-        log.info("payCreate {}", payCreate);
-        assertThat(payCreate, is(notNullValue()));
-    }
+	@Before
+	public void beforeInit() {
+		PayCreate payCreate = new PayCreate();
+		payCreate.setAmount(new BigDecimal(0.01));
+		payCreate.setBizCode(orderCodeAlipay);
+		payCreate.setClientIp("127.0.0.1");
+		payCreate.setBizType(Constant.ORDER_TYPE_BIZ_BASE);
+		payCreate.setSubject("我是支付宝测试订单啊");
+		payCreate.setPayType(ConstantPay.TRADE_TYPE_ALIPAY);
+		Order order = payService.create(payCreate);
+		orderPayCodeAlipay = order.getPayCode();
+		log.info("payCreate {}", payCreate);
+		assertThat(payCreate, is(notNullValue()));
+		payCreate = new PayCreate();
+		payCreate.setAmount(new BigDecimal(0.01));
+		payCreate.setBizCode(orderCodeWechat);
+		payCreate.setClientIp("127.0.0.1");
+		payCreate.setBizType(Constant.ORDER_TYPE_BIZ_BASE);
+		payCreate.setSubject("我是微信App测试订单啊");
+		payCreate.setAttach(orderCodeWechat);
+		payCreate.setPayType(ConstantPay.TRADE_TYPE_WEIXIN);
+		order = payService.create(payCreate);
+		orderPayCodeWechat = order.getPayCode();
+		log.info("payCreate {}", payCreate);
+		assertThat(payCreate, is(notNullValue()));
+	}
 
+	@Test
+	public void genParams() throws Exception {
+		String params = payService.genParams(orderPayCodeAlipay);
+		log.info("params Alipay {}", params);
+		assertThat(params, is(notNullValue()));
+		params = payService.genParams(orderPayCodeWechat);
+		log.info("params Wechat {}", params);
+		assertThat(params, is(notNullValue()));
 
-    @Test
-    public void genParams() throws Exception {
-        String params = payService.genParams(orderCodeAlipay);
-        log.info("params Alipay {}", params);
-        assertThat(params, is(notNullValue()));
-        params = payService.genParams(orderCodeWechat);
-        log.info("params Wechat {}", params);
-        assertThat(params, is(notNullValue()));
+	}
 
-    }
+	@Test
+	public void query() throws Exception {
 
+		List<Order> tempOrders = orderRepository.findAll();
+		log.info(tempOrders.toString());
+		PayQuery payQuery = new PayQuery();
+		payQuery.setPayType(ConstantPay.TRADE_TYPE_ALIPAY);
+		payQuery.setBizType(Constant.ORDER_TYPE_BIZ_BASE);
+		payQuery.setBeginCreateTime(DateUtil.addHours(PublicUtil.getCurrentDate(), -1));
+		payQuery.setEndCreateTime(DateUtil.addHours(PublicUtil.getCurrentDate(), +1));
+		payQuery.setPayStatus(Constant.ORDER_PAY_STATUS_WAIT_PAY);
+		List<Order> orders = payService.queryOrders(payQuery);
+		assertThat(orders.size() > 0, is(true));
+		payQuery = new PayQuery();
+		payQuery.setPayType(ConstantPay.TRADE_TYPE_WEIXIN);
+		payQuery.setBizType(Constant.ORDER_TYPE_BIZ_BASE);
+		payQuery.setBeginCreateTime(DateUtil.addHours(PublicUtil.getCurrentDate(), -1));
+		payQuery.setEndCreateTime(DateUtil.addHours(PublicUtil.getCurrentDate(), +1));
+		payQuery.setPayStatus(Constant.ORDER_PAY_STATUS_WAIT_PAY);
+		orders = payService.queryOrders(payQuery);
+		assertThat(orders.size() > 2, is(true));
+	}
 
-    @Test
-    public void query() throws Exception {
+	@Test
+	public void update() throws Exception {
 
+		Order orderBefore = payService.findOneByPayCode(orderPayCodeAlipay);
+		BigDecimal bd = new BigDecimal(0.02);
+		PayUpdate payUpdate = new PayUpdate();
+		payUpdate.setPayCode(orderPayCodeAlipay);
+		payUpdate.setAmount(bd);
+		payUpdate.setChangeType(Constant.ORDER_LOG_CHANGE_TYPE_1);
+		payService.update(payUpdate);
+		Order order = payService.findOneByPayCode(orderPayCodeAlipay);
+		assertThat(order.getAmount().subtract(bd).intValue() == 0, is(true));
 
-        List<Order> tempOrders = orderRepository.findAll();
-        log.info(tempOrders.toString());
-        PayQuery payQuery = new PayQuery();
-        payQuery.setPayType(ConstantPay.TRADE_TYPE_ALIPAY);
-        payQuery.setBizType(Constant.ORDER_TYPE_BIZ_BASE);
-        payQuery.setBeginCreateTime(DateUtil.addHours(PublicUtil.getCurrentDate(), -1));
-        payQuery.setEndCreateTime(DateUtil.addHours(PublicUtil.getCurrentDate(), +1));
-        payQuery.setPayStatus(Constant.ORDER_PAY_STATUS_WAIT_PAY);
-        List<Order> orders = payService.queryOrders(payQuery);
-        assertThat(orders.size()>0, is(true));
-        payQuery = new PayQuery();
-        payQuery.setPayType(ConstantPay.TRADE_TYPE_WEIXIN);
-        payQuery.setBizType(Constant.ORDER_TYPE_BIZ_BASE);
-        payQuery.setBeginCreateTime(DateUtil.addHours(PublicUtil.getCurrentDate(), -1));
-        payQuery.setEndCreateTime(DateUtil.addHours(PublicUtil.getCurrentDate(), +1));
-        payQuery.setPayStatus(Constant.ORDER_PAY_STATUS_WAIT_PAY);
-        orders = payService.queryOrders(payQuery);
-        assertThat(orders.size()>2, is(true));
-    }
+		OrderLog orderLog = orderLogRepository.findOneByOrderId(order.getId());
 
+		assertThat(orderLog.getBefore().subtract(orderBefore.getAmount()).intValue() == 0, is(true));
+		assertThat(orderLog.getAfter().subtract(order.getAmount()).intValue() == 0, is(true));
 
-    @Test
-    public void update() throws Exception {
+		orderBefore = payService.findOneByPayCode(orderPayCodeWechat);
+		bd = new BigDecimal(0.02);
+		payUpdate = new PayUpdate();
+		payUpdate.setPayCode(orderPayCodeWechat);
+		payUpdate.setAmount(bd);
+		payUpdate.setChangeType(Constant.ORDER_LOG_CHANGE_TYPE_1);
+		payService.update(payUpdate);
+		order = payService.findOneByPayCode(orderPayCodeWechat);
+		assertThat(order.getAmount().subtract(bd).intValue() == 0, is(true));
+		orderLog = orderLogRepository.findOneByOrderId(order.getId());
 
-        Order orderBefore = payService.findOneByBizCode(orderCodeAlipay);
-        BigDecimal bd = new BigDecimal(0.02);
-        PayUpdate payUpdate = new PayUpdate();
-        payUpdate.setPayCode(orderPayCodeAlipay);
-        payUpdate.setAmount(bd);
-        payUpdate.setChangeType(Constant.ORDER_LOG_CHANGE_TYPE_1);
-        payService.update(payUpdate);
-        Order order = payService.findOneByBizCode(orderCodeAlipay);
-        assertThat(order.getAmount().subtract(bd).intValue()==0, is(true));
+		assertThat(orderLog.getBefore().subtract(orderBefore.getAmount()).intValue() == 0, is(true));
+		assertThat(orderLog.getAfter().subtract(order.getAmount()).intValue() == 0, is(true));
 
-        OrderLog orderLog = orderLogRepository.findOneByOrderId(order.getId());
-
-        assertThat(orderLog.getBefore().subtract(orderBefore.getAmount()).intValue()==0, is(true));
-        assertThat(orderLog.getAfter().subtract(order.getAmount()).intValue()==0, is(true));
-
-        orderBefore = payService.findOneByBizCode(orderCodeWechat);
-        bd = new BigDecimal(0.02);
-        payUpdate = new PayUpdate();
-        payUpdate.setPayCode(orderPayCodeWechat);
-        payUpdate.setAmount(bd);
-        payUpdate.setChangeType(Constant.ORDER_LOG_CHANGE_TYPE_1);
-        payService.update(payUpdate);
-        order = payService.findOneByBizCode(orderCodeWechat);
-        assertThat(order.getAmount().subtract(bd).intValue()==0, is(true));
-        orderLog = orderLogRepository.findOneByOrderId(order.getId());
-
-        assertThat(orderLog.getBefore().subtract(orderBefore.getAmount()).intValue()==0, is(true));
-        assertThat(orderLog.getAfter().subtract(order.getAmount()).intValue()==0, is(true));
-
-
-    }
-
-
+	}
 
 }

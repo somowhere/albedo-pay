@@ -19,39 +19,35 @@ import com.qingju.java.common.pay.core.vo.Wechat;
 import com.qingju.java.pay.config.PayProperties;
 import com.qingju.java.pay.util.PayUtil;
 
-
 /**
  * Created by lijie on 2017/4/28.
  */
-@ContextConfiguration(classes = {RedisAutoConfiguration.class, TestConfig.class},
-        initializers = { ConfigFileApplicationContextInitializer.class })
+@ContextConfiguration(classes = { RedisAutoConfiguration.class, TestConfig.class }, initializers = {
+		ConfigFileApplicationContextInitializer.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class WechatTest {
 
-    @Autowired
-    PayProperties payProperties;
+	@Autowired
+	PayProperties payProperties;
 
-    @Autowired
-    DictService dictService;
+	@Autowired
+	DictService dictService;
 
-    @org.junit.Test
-    public void notifyVerify() throws Exception {
-//        Dict dict = dictService.findOne("cabfaded960e47b1be0ae4c796f98bc7");
-//        System.out.println(dict);
-        PayWechatParam payWechatParam = PayUtil.
-                findParamsByClass(Constant.ORDER_TYPE_BIZ_BASE, ConstantPay.TRADE_TYPE_WEIXIN,
-                        PayWechatParam.class);
-        Wechat wechat = new Wechat(payWechatParam, payProperties.getDomain());
-        wechat.setBody("主题");
-        wechat.setOut_trade_no("aaaaaaa444");
-        wechat.setSpbill_create_ip("192.168.1.1");
-        wechat.setTotal_fee(1);
-        wechat.setAttach("111");
-        String paramStr = wechat.buildRequestPara(1);
-        System.out.println(paramStr);
-        assertThat(paramStr, is(notNullValue()));
-    }
-
-
+	@org.junit.Test
+	public void notifyVerify() throws Exception {
+		// Dict dict = dictService.findOne("cabfaded960e47b1be0ae4c796f98bc7");
+		// System.out.println(dict);
+		PayWechatParam payWechatParam = PayUtil.findParamsByClass(Constant.ORDER_TYPE_BIZ_BASE,
+				ConstantPay.TRADE_TYPE_WEIXIN, PayWechatParam.class);
+		Wechat wechat = new Wechat(payWechatParam, payProperties.getDomain());
+		wechat.setBody("主题");
+		wechat.setOut_trade_no("aaaaaaa444");
+		wechat.setSpbill_create_ip("192.168.1.1");
+		wechat.setTotal_fee(1);
+		wechat.setAttach("111");
+		String paramStr = wechat.buildRequestPara(1);
+		System.out.println(paramStr);
+		assertThat(paramStr, is(notNullValue()));
+	}
 
 }
