@@ -4,10 +4,10 @@
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
     <contextName>HcxdMpnsRpcServer</contextName>
-    <property name="LOG_LEVEL" value="${log.level}"/>
+    <property name="LOG_LEVEL" value="INFO"/>
     <property name="LOG_PATH" value="logs"/>
     <!--设置系统日志目录-->
-    <property name="APPDIR" value="hcxd-mpns-rpc-server"/>
+    <property name="APPDIR" value="hcxd-pay-rpc-server"/>
     <!--
           说明：
           1、日志级别及文件
@@ -128,6 +128,7 @@
         </connectionSource>
     </appender>-->
 
+    <logger name="com.qingju.java" level="DEBUG"/>
     <logger name="javax.activation" level="WARN"/>
     <logger name="javax.mail" level="WARN"/>
     <logger name="javax.xml.bind" level="WARN"/>

@@ -100,7 +100,7 @@ public class PayServiceTest {
         payQuery.setBeginCreateTime(DateUtil.addHours(PublicUtil.getCurrentDate(), -1));
         payQuery.setEndCreateTime(DateUtil.addHours(PublicUtil.getCurrentDate(), +1));
         payQuery.setPayStatus(Constant.ORDER_PAY_STATUS_WAIT_PAY);
-        List<Order> orders = payService.query(payQuery);
+        List<Order> orders = payService.queryOrdes(payQuery);
         assertThat(orders.size()>0, is(true));
         payQuery = new PayQuery();
         payQuery.setPayType(ConstantPay.TRADE_TYPE_WEIXIN);
@@ -108,7 +108,7 @@ public class PayServiceTest {
         payQuery.setBeginCreateTime(DateUtil.addHours(PublicUtil.getCurrentDate(), -1));
         payQuery.setEndCreateTime(DateUtil.addHours(PublicUtil.getCurrentDate(), +1));
         payQuery.setPayStatus(Constant.ORDER_PAY_STATUS_WAIT_PAY);
-        orders = payService.query(payQuery);
+        orders = payService.queryOrdes(payQuery);
         assertThat(orders.size()>2, is(true));
     }
 
