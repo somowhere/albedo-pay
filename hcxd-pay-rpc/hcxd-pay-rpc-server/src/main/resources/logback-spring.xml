@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration scan="true">
-    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <!--<include resource="org/springframework/boot/logging/logback/base.xml"/>-->
 
-    <contextName>HcxdMpnsRpcServer</contextName>
-    <property name="LOG_LEVEL" value="INFO"/>
-    <property name="LOG_PATH" value="logs"/>
+    <contextName>HcxdPayWebServer</contextName>
+    <property name="LOG_PATH" value="D://.logs"/>
     <!--设置系统日志目录-->
     <property name="APPDIR" value="hcxd-pay-rpc-server"/>
     <!--
@@ -75,7 +74,7 @@
         <append>true</append>
         <!-- 日志文件的格式 -->
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>===%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger Line:%-3L - %msg%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger Line:%-3L - %msg%n</pattern>
             <charset>utf-8</charset>
         </encoder>
         <!-- 此日志文件只记录info级别的 -->
@@ -115,7 +114,7 @@
             <onMismatch>DENY</onMismatch>
         </filter>
     </appender>
-    <!--日志异步到数据库
+    <!--日志异步到数据库  -->
     <appender name="DBAPPENDER" class="ch.qos.logback.classic.db.DBAppender">
         <connectionSource class="ch.qos.logback.core.db.DataSourceConnectionSource">
             <dataSource class="com.zaxxer.hikari.HikariDataSource">
@@ -126,27 +125,45 @@
                 <poolName>HikariPool-logback</poolName>
             </dataSource>
         </connectionSource>
-    </appender>-->
-
+        <!-- 此日志文件只记录info级别的 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>warn</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <!-- 此日志文件只记录info级别的 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>error</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>===%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger Line:%-3L - %msg%n</pattern>
+            <!--<charset>GBK</charset>-->
+        </encoder>
+    </appender>
+    <logger name="com.albedo.java" level="DEBUG"/>
     <logger name="com.qingju.java" level="DEBUG"/>
+
     <logger name="javax.activation" level="WARN"/>
     <logger name="javax.mail" level="WARN"/>
     <logger name="javax.xml.bind" level="WARN"/>
-    <logger name="org.apache.zookeeper" level="INFO"/>
-    <logger name="org.mongodb.driver" level="INFO"/>
+    <logger name="ch.qos.logback" level="INFO"/>
     <logger name="com.codahale.metrics" level="WARN"/>
     <logger name="com.ryantenney" level="WARN"/>
     <logger name="com.sun" level="WARN"/>
     <logger name="com.zaxxer" level="WARN"/>
     <logger name="io.undertow" level="WARN"/>
     <logger name="net.sf.ehcache" level="WARN"/>
-    <!--<logger name="org.apache" level="WARN"/>-->
+    <logger name="org.apache" level="WARN"/>
     <logger name="org.apache.catalina.startup.DigesterFactory" level="OFF"/>
     <logger name="org.bson" level="WARN"/>
     <logger name="org.hibernate.validator" level="WARN"/>
     <logger name="org.hibernate" level="WARN"/>
     <logger name="org.hibernate.ejb.HibernatePersistence" level="OFF"/>
-    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.springframework" level="WARN"/>
     <logger name="org.springframework.web" level="INFO"/>
     <logger name="org.springframework.security" level="WARN"/>
     <logger name="org.springframework.cache" level="WARN"/>
@@ -161,11 +178,12 @@
         <resetJUL>true</resetJUL>
     </contextListener>
 
-    <root level="${LOG_LEVEL}">
+    <root level="INFO">
         <appender-ref ref="FILEERROR"/>
         <appender-ref ref="FILEWARN"/>
         <appender-ref ref="FILEINFO"/>
-        <appender-ref ref="CONSOLE"/>
+        <!--<appender-ref ref="DBAPPENDER"/>-->
+        <appender-ref ref="stdout"/>
     </root>
 
 </configuration>

@@ -8,13 +8,21 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <!--<packaging>war</packaging>-->
+    <packaging>war</packaging>
     <artifactId>hcxd-pay-web</artifactId>
     <dependencies>
         <dependency>
             <groupId>com.albedo.java</groupId>
             <artifactId>albedo-boot-web-starter</artifactId>
             <version>${albedo.version}</version>
+            <exclusions>
+            	<exclusion>
+            		<groupId>org.springframework.boot</groupId>
+            		<artifactId>
+            			spring-boot-starter-undertow
+            		</artifactId>
+            	</exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.qingju.java</groupId>
@@ -23,6 +31,7 @@
         </dependency>
     </dependencies>
     <build>
+        <finalName>hcxd-pay-web</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -41,6 +50,17 @@
                         <profile>dev,swagger</profile>
                         <!--<profile>pro</profile>-->
                     </profiles>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <inherited>true</inherited>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <webappDirectory>${project.build.directory}/hcxd-pay-web</webappDirectory>
                 </configuration>
             </plugin>
         </plugins>

@@ -49,10 +49,21 @@
         
     </dependencies>
     <build>
+        <finalName>hcxd-pay-rpc-server</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <inherited>true</inherited>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <webappDirectory>${project.build.directory}/hcxd-pay-rpc-server</webappDirectory>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -77,5 +88,6 @@
     </profile>
 
 </profiles>
+
 
 </project>

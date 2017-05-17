@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration scan="true">
-    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <!--<include resource="org/springframework/boot/logging/logback/base.xml"/>-->
 
     <contextName>HcxdPayWebServer</contextName>
-    <property name="LOG_PATH" value="logs"/>
+    <property name="LOG_PATH" value="D://.logs"/>
     <!--设置系统日志目录-->
     <property name="APPDIR" value="hcxd-pay-web-server"/>
     <!--
@@ -138,8 +138,14 @@
             <onMismatch>DENY</onMismatch>
         </filter>
     </appender>
-
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger Line:%-3L - %msg%n</pattern>
+            <!--<charset>GBK</charset>-->
+        </encoder>
+    </appender>
     <logger name="com.albedo.java" level="DEBUG"/>
+    <logger name="com.qingju.java" level="DEBUG"/>
 
     <logger name="javax.activation" level="WARN"/>
     <logger name="javax.mail" level="WARN"/>
@@ -177,7 +183,7 @@
         <appender-ref ref="FILEWARN"/>
         <appender-ref ref="FILEINFO"/>
         <!--<appender-ref ref="DBAPPENDER"/>-->
-        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="stdout"/>
     </root>
 
 </configuration>
