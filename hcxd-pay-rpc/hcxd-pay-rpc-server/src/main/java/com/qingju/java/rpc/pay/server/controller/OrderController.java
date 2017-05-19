@@ -1,7 +1,7 @@
 package com.qingju.java.rpc.pay.server.controller;
 
+import com.albedo.java.rpc.vo.DataMessage;
 import com.qingju.java.pay.service.PayService;
-import com.qingju.java.pay.vo.DataMessage;
 import com.qingju.java.pay.vo.PayUpdate;
 import com.qingju.java.rpc.pay.service.GrpcPayConstant;
 import lombok.extern.slf4j.Slf4j;

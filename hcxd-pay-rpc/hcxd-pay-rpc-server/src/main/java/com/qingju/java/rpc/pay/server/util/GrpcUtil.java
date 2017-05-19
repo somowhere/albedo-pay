@@ -1,6 +1,6 @@
 package com.qingju.java.rpc.pay.server.util;
 
-import com.qingju.java.pay.vo.DataMessage;
+import com.albedo.java.rpc.vo.DataMessage;
 import com.qingju.java.rpc.pay.service.grpc.DataResponse;
 import io.grpc.stub.StreamObserver;
 

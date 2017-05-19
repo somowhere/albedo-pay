@@ -1,8 +1,8 @@
 package com.qingju.java.pay.rpc.client.service;
 
 import com.albedo.java.grpc.client.GrpcClient;
+import com.albedo.java.rpc.vo.DataMessage;
 import com.alibaba.fastjson.JSON;
-import com.qingju.java.pay.vo.DataMessage;
 import com.qingju.java.pay.vo.Order;
 import com.qingju.java.pay.vo.PayCreate;
 import com.qingju.java.pay.vo.PayQuery;
