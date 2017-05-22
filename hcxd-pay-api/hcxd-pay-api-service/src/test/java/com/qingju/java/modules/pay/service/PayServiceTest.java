@@ -123,7 +123,7 @@ public class PayServiceTest {
 		PayUpdate payUpdate = new PayUpdate();
 		payUpdate.setPayCode(orderPayCodeAlipay);
 		payUpdate.setAmount(bd);
-		payUpdate.setChangeType(Constant.ORDER_LOG_CHANGE_TYPE_1);
+		payUpdate.setChangeType(Constant.ORDER_LOG_CHANGE_TYPE_2);
 		payService.update(payUpdate);
 		Order order = payService.findOneByPayCode(orderPayCodeAlipay);
 		assertThat(order.getAmount().subtract(bd).intValue() == 0, is(true));
@@ -138,7 +138,7 @@ public class PayServiceTest {
 		payUpdate = new PayUpdate();
 		payUpdate.setPayCode(orderPayCodeWechat);
 		payUpdate.setAmount(bd);
-		payUpdate.setChangeType(Constant.ORDER_LOG_CHANGE_TYPE_1);
+		payUpdate.setChangeType(Constant.ORDER_LOG_CHANGE_TYPE_2);
 		payService.update(payUpdate);
 		order = payService.findOneByPayCode(orderPayCodeWechat);
 		assertThat(order.getAmount().subtract(bd).intValue() == 0, is(true));

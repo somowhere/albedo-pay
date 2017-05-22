@@ -107,9 +107,13 @@ public class Constant {
 	public static final int ORDER_TYPE_BIZ_BASE = 1;
 
 	/**
-	 * 支付日志改变类型 1:优惠券变更
+	 * 支付日志改变类型 1: 更新订单
 	 */
 	public static final int ORDER_LOG_CHANGE_TYPE_1 = 1;
+	/**
+	 * 支付日志改变类型 2:优惠券变更价格
+	 */
+	public static final int ORDER_LOG_CHANGE_TYPE_2 = 2;
 
 	/**
 	 * 支付状态 0：待支付
