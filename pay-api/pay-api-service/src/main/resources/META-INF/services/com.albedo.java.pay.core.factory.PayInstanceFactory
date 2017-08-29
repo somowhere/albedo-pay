@@ -1,0 +1,2 @@
+com.albedo.java.pay.core.factory.PayInstanceWechatFactory
+com.albedo.java.pay.core.factory.PayInstanceAlipayFactory

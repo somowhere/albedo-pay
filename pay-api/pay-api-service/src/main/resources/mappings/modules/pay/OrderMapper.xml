@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.albedo.java.pay.domain.Order">
+
+	<sql id="orderColumns">
+		a.id_ AS id,
+		a.amount_ AS amount,
+		a.attach_ AS attach,
+		a.biz_code AS bizCode,
+		a.biz_type AS bizType,
+		a.client_ip AS clientIp,
+		a.created_by AS createdBy,
+		a.created_date AS createdDate,
+		a.description_ AS description,
+		a.finish_time AS finishTime,
+		a.invoke_type AS invokeType,
+		a.last_modified_by AS lastModifiedBy,
+		a.last_modified_date AS lastModifiedDate,
+		a.open_id AS openId,
+		a.pay_code AS payCode,
+		a.pay_type AS payType,
+		a.pay_status AS payStatus,
+		a.subject_ AS SUBJECT,
+		a.status_ AS STATUS,
+		a.trade_id AS tradeId,
+		a.version_ AS version
+	</sql>
+
+	<select id="findOrders" resultType="com.albedo.java.pay.domain.Order"
+			parameterType="com.albedo.java.pay.vo.PayQuery">
+		SELECT
+		<include refid="orderColumns"/>
+		from pay_order a
+		<trim prefix=" where " prefixOverrides="and">
+			<if test="payQuery!=null">
+				<if test="payQuery.payType != null">
+					AND a.pay_type = #{payQuery.payType}
+				</if>
+				<if test="payQuery.beginCreateTime != null and payQuery.endCreateTime != null">
+					AND a.created_date BETWEEN #{payQuery.beginCreateTime} AND #{payQuery.endCreateTime}
+				</if>
+				<if test="payQuery.payStatus != null">
+					AND a.pay_status = #{payQuery.payStatus}
+				</if>
+				<if test="payQuery.bizType != null">
+					AND a.biz_type = #{payQuery.bizType}
+				</if>
+			</if>
+		</trim>
+	</select>
+
+</mapper>

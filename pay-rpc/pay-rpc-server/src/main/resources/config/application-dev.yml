@@ -1,0 +1,43 @@
+spring:
+    datasource:
+        type: com.zaxxer.hikari.HikariDataSource
+        url: jdbc:mysql://localhost:3306/pay?useUnicode=true&characterEncoding=utf8&useSSL=false
+        name:
+        username: root
+        password: 123456
+        hikari:
+            data-source-properties:
+                cachePrepStmts: true
+                prepStmtCacheSize: 250
+                prepStmtCacheSqlLimit: 2048
+                useServerPrepStmts: true
+    redis :
+        password : hcxd-elk
+        cluster :
+            nodes : 114.55.177.236:7000,114.55.177.236:7001,114.55.177.236:7002,114.55.177.236:7003,114.55.177.236:7004,114.55.177.236:7005
+
+pay:
+    domain: 127.0.0.1
+    appDomain: 127.0.0.1
+server:
+    port: 8874
+
+grpc:
+    server:
+        port: 9999
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+
+
+
+
+
+
+
+
