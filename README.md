@@ -1,7 +1,7 @@
-## pay-master
+# pay-master
 支付宝，微信，grpc 通用支付平台
 
-###项目依赖 
+##项目依赖 
 [albedo-boot](https://github.com/somewhereMrli/albedo-boot)
 [albedo-grpc](https://github.com/somewhereMrli/albedo-grpc)
 
