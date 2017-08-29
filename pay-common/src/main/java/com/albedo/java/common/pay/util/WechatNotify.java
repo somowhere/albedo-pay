@@ -1,4 +1,4 @@
-// package com.qingju.java.common.pay.util;
+// package com.albedo.java.common.pay.util;
 //
 //
 //

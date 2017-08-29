@@ -32,7 +32,7 @@ import com.albedo.java.pay.config.PayProperties;
 @EnableEurekaClient
 @EnableDiscoveryClient
 @SpringBootApplication
-@ComponentScan(basePackages = { "com.albedo.java.*", "com.qingju.java.*" })
+@ComponentScan(basePackages = { "com.albedo.java.*", "com.albedo.java.*" })
 @EnableConfigurationProperties({ AlbedoProperties.class, PayProperties.class, RedisProperties.class })
 public class HcxdPayRpcServerApp {
 	private static final Logger log = LoggerFactory.getLogger(HcxdPayRpcServerApp.class);

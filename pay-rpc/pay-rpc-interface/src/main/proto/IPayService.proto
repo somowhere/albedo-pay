@@ -1,7 +1,7 @@
 syntax = "proto2";
 
 option java_multiple_files = true;
-package com.qingju.java.rpc.pay.service.grpc;
+package com.albedo.java.rpc.pay.service.grpc;
 
 
 service PayService {

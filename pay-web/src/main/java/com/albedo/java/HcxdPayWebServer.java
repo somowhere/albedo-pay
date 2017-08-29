@@ -28,7 +28,7 @@ import com.albedo.java.pay.config.PayProperties;
 /**
  * Created by lijie on 2017/3/23.
  */
-@ComponentScan(basePackages = { "com.albedo.java.*", "com.qingju.java.*" })
+@ComponentScan(basePackages = { "com.albedo.java.*", "com.albedo.java.*" })
 @EnableAutoConfiguration(exclude = { MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class })
 @EnableConfigurationProperties({ AlbedoProperties.class, PayProperties.class })
 public class HcxdPayWebServer {

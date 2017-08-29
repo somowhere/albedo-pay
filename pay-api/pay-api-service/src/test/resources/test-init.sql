@@ -47,10 +47,10 @@ CREATE TABLE gen_scheme_t (
 -- ----------------------------
 -- Records of gen_scheme_t
 -- ----------------------------
-INSERT INTO gen_scheme_t VALUES ('18e4e08164ef43dea137fa612aa120d4', '支付订单管理', 'curd', '0', 'com.qingju.java.modules', 'pay', '', '支付订单管理', '支付订单', 'lj', '8e135f09e5884a40aa010d11dde91789', '0', '25', '', '1', '2017-04-20 10:25:53', '1', '2017-05-03 09:34:10');
-INSERT INTO gen_scheme_t VALUES ('4fe5f7d3e6c54788a2ecf99cf8813669', '订单日志', 'curd', '0', 'com.qingju.java.modules', 'pay', '', '订单日志', '订单日志', 'lj', '5c0efb5211714fcab560aa57faf3b667', '0', '0', '', '1', '2017-05-16 10:40:49', '1', '2017-05-16 10:40:49');
-INSERT INTO gen_scheme_t VALUES ('813bf12e53854e488e13ebc028f340f8', '订单日志管理', 'curd', '0', 'com.qingju.java.modules', 'pay', '', '订单日志', '订单日志', 'lj', '2a10b445a5c04837b7de7b8f3d247baa', '-2', '9', '', '1', '2017-04-20 11:54:46', '1', '2017-05-16 10:38:34');
-INSERT INTO gen_scheme_t VALUES ('f999a42523b649c2bb3c06eda8647fb6', '支付参数', 'curd', '0', 'com.qingju.java.modules', 'pay', '', '支付参数', '支付参数', 'lj', '672f40cddc64454f98da9cd8038dc813', '0', '2', '', '1', '2017-05-02 17:23:27', '1', '2017-05-02 20:43:56');
+INSERT INTO gen_scheme_t VALUES ('18e4e08164ef43dea137fa612aa120d4', '支付订单管理', 'curd', '0', 'com.albedo.java.modules', 'pay', '', '支付订单管理', '支付订单', 'lj', '8e135f09e5884a40aa010d11dde91789', '0', '25', '', '1', '2017-04-20 10:25:53', '1', '2017-05-03 09:34:10');
+INSERT INTO gen_scheme_t VALUES ('4fe5f7d3e6c54788a2ecf99cf8813669', '订单日志', 'curd', '0', 'com.albedo.java.modules', 'pay', '', '订单日志', '订单日志', 'lj', '5c0efb5211714fcab560aa57faf3b667', '0', '0', '', '1', '2017-05-16 10:40:49', '1', '2017-05-16 10:40:49');
+INSERT INTO gen_scheme_t VALUES ('813bf12e53854e488e13ebc028f340f8', '订单日志管理', 'curd', '0', 'com.albedo.java.modules', 'pay', '', '订单日志', '订单日志', 'lj', '2a10b445a5c04837b7de7b8f3d247baa', '-2', '9', '', '1', '2017-04-20 11:54:46', '1', '2017-05-16 10:38:34');
+INSERT INTO gen_scheme_t VALUES ('f999a42523b649c2bb3c06eda8647fb6', '支付参数', 'curd', '0', 'com.albedo.java.modules', 'pay', '', '支付参数', '支付参数', 'lj', '672f40cddc64454f98da9cd8038dc813', '0', '2', '', '1', '2017-05-02 17:23:27', '1', '2017-05-02 20:43:56');
 
 -- ----------------------------
 -- Table structure for gen_table_column_t

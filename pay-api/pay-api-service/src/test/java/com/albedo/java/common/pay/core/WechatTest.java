@@ -1,4 +1,4 @@
-//package com.qingju.java.common.pay.core;
+//package com.albedo.java.common.pay.core;
 //
 //import static org.hamcrest.Matchers.is;
 //import static org.hamcrest.Matchers.notNullValue;

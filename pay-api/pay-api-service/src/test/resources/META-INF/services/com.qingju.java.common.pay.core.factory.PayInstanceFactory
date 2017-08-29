@@ -1,2 +1,2 @@
-com.qingju.java.common.pay.core.factory.PayInstanceWechatFactory
-com.qingju.java.common.pay.core.factory.PayInstanceAlipayFactory
+com.albedo.java.common.pay.core.factory.PayInstanceWechatFactory
+com.albedo.java.common.pay.core.factory.PayInstanceAlipayFactory

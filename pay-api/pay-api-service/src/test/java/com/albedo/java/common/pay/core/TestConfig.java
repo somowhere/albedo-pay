@@ -1,4 +1,4 @@
-//package com.qingju.java.common.pay.core;
+//package com.albedo.java.common.pay.core;
 //
 //import java.sql.SQLException;
 //import java.util.Date;
@@ -43,9 +43,9 @@
 // */
 //@Configuration
 //@EnableMybatisRepositories(value = { "com.albedo.java.modules.*.repository",
-//		"com.qingju.java.pay.*.repository" }, mapperLocations = "classpath*:/mappings/modules/*/*Mapper.xml")
+//		"com.albedo.java.pay.*.repository" }, mapperLocations = "classpath*:/mappings/modules/*/*Mapper.xml")
 //@EnableTransactionManagement
-//@ComponentScan(basePackages = { "com.albedo.java.*", "com.qingju.java.*" })
+//@ComponentScan(basePackages = { "com.albedo.java.*", "com.albedo.java.*" })
 //@AutoConfigureAfter(value = RedisAutoConfiguration.class)
 //@EnableConfigurationProperties({ AlbedoProperties.class, PayProperties.class, RedisProperties.class })
 //public class TestConfig implements ResourceLoaderAware, ApplicationContextAware {

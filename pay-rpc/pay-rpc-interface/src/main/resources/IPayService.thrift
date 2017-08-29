@@ -1,4 +1,4 @@
-namespace java com.qingju.java.rpc.pay.service.thrift
+namespace java com.albedo.java.rpc.pay.service.thrift
 
 service PayThriftService {
 

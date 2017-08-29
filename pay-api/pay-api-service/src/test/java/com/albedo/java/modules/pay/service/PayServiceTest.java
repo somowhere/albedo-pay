@@ -1,4 +1,4 @@
-//package com.qingju.java.modules.pay.service;
+//package com.albedo.java.modules.pay.service;
 //
 //import static org.hamcrest.Matchers.is;
 //import static org.hamcrest.Matchers.notNullValue;
@@ -20,7 +20,7 @@
 //import com.albedo.java.util.PublicUtil;
 //import Constant;
 //import ConstantPay;
-//import com.qingju.java.common.pay.core.TestConfig;
+//import com.albedo.java.common.pay.core.TestConfig;
 //import Order;
 //import OrderLog;
 //import OrderLogRepository;
