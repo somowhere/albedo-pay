@@ -1,16 +1,16 @@
-# pay-master
-支付宝，微信，
+## pay-master
+支付宝，微信，grpc 通用支付平台
 
-项目注册发现依赖 eureka
+###项目依赖 
+[albedo-boot](https://github.com/somewhereMrli/albedo-boot)
+[albedo-grpc](https://github.com/somewhereMrli/albedo-grpc)
 
-cloud-grpc-client 注解实现 可与springboot集成
-cloud-grpc-client-netfix 配置文件 可与spring集成
 
 启动顺序：
     
-    cloud-eureka-server
-    cloud-grpc-client
-    cloud-grpc-server
+    pay-eureka-server
+    pay-rpc-server
+    pay-web
 
 启动方式: mvn spring-boot:run 
 
